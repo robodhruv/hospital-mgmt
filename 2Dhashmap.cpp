@@ -1,4 +1,14 @@
-#include "hospital.h"
+/*
+This file has the implementation of the 2D Hash Map, for storing and
+querying patient data from a database efficiently.
+ -------------------------------------------------------------------
+| Shashwat Shukla, Dhruv Ilesh Shah, Parth Jatakia, Pranav Kulkarni.|
+| CS213(M) - Data Structures and Algorithms, Spring 2017.           |
+| IIT Bombay                                                        |
+ -------------------------------------------------------------------
+*/
+
+#include "hospi.h"
 
 class HashNode {
 // A node in the 2D hash table. Note that the input does not

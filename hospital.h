@@ -37,7 +37,7 @@ class patient{
     vector<diagnosis> prescription; //Diagnosed disease and corresponding treatement for the patient
 public:
     void getName(string &fname, string &lname);
-    string getID();
+    void getID(string &id);
     void setName(string fname, string lname);
     //Add accessor and mutator functions
 };
