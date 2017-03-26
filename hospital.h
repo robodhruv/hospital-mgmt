@@ -15,6 +15,7 @@ Function definitions will be enumerated in separate files.
 #include <stack>
 #include <queue>
 #include <string>
+#include <numeric>
 
 #define TABLE_SIZE 100
 
@@ -30,14 +31,14 @@ queue<patient> Reception;
 
 //Each patient has relevant attributes  
 class patient{
-    string name, ID; //Identity of the patient
+    string fname, lname, ID; //Identity of the patient
     vector<string> symptoms; //Symptoms displayed by the patient. Change to stack if needed
     stack<string> doctors; //Doctors the patient must visit based on his symptoms. Keep popping docs till empty
     vector<diagnosis> prescription; //Diagnosed disease and corresponding treatement for the patient
 public:
-    string getName();
+    void getName(string &fname, string &lname);
     string getID();
-    string setName(string name);
+    void setName(string fname, string lname);
     //Add accessor and mutator functions
 };
 
