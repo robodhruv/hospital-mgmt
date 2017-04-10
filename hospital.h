@@ -16,6 +16,7 @@ Function definitions will be enumerated in separate files.
 #include <queue>
 #include <string>
 #include <numeric>
+#include <limits>
 
 #define TABLE_SIZE 100
 
@@ -45,13 +46,18 @@ public:
 //At the reception, the patients are assigned to a doctor based on their symptoms.
 //As of now, they are assigned to one doctor, despite having multiple symptoms. This doctor then 
 //assigns the patient to the next doctor based on his/her other symptoms.
-doctor assigndoc(patient p);
+void assigndoc(patient p, int fieldID);
 
 //Each doctor is identified by his name, id(remove if not needed) and specialisation
 class doctor{
-    string name, id, field; //field refers to the doctor's specialisation
+    string name;
+    int fieldID; // fieldID is an int given to each field of specialization eg. 1 for general physician, 2 for Orthopedic...
+    queue<patient*> patientLine; // queue of the patient waiting to be diagnosed under the doctor. 
+    //..$%$%$ I am doubtful if this is how a queue of pointers to patient is implemeneted please check.$%$%$
 public:
-    diagnosis diagnose(patient p); //Diagnose patient p and prescribe a treatment
+    void addToLine(patient &p); //adds patient p to the queue of the doctor.
+    void diagnose(bool cured, int fieldIDNextDoc); //Diagnose patient first in the queue and add diagnosis in patient's prescription vector.
+    int areUmyDoc(int fieldID);
     //Add accessor and mutator functions
 };
 

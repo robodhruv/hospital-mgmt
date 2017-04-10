@@ -10,16 +10,53 @@ in the header file "hospital.h"
 
 #include "hospital.h"
 
-void patient::getName(string &fname, string &lname) {
+//.......Patient Functions..........//
+void patient::getName(string &fname, string &lname) 
+{
 	fname = patient::fname;
 	lname = patient::lname;
 }
 
-void patient::getID(string &id) {
+void patient::getID(string &id) 
+{
 	id = patient::ID;
 }
 
-void patient::setName(string fname, string lname) {
+void patient::setName(string fname, string lname) 
+{
 	patient::fname = fname;
 	patient::lname = lname;
+}
+
+//.......Doctor Functions..........//
+void doctor::addToLine(patient &p)
+{
+	doctor::patientLine.pushback(p);
+	cout<<"Patient added to waiting line for Dr. " << doctor::name << endl;
+}
+
+void doctor::diagnose(bool cured, int fieldIDNextDoc)
+{
+	if(cured)
+	{
+		cout<<"Patient has been cured"<<endl; // Patients name must also be displayed for this patients getName function should be changed
+		doctor::patientLine.pop();
+	}
+	else
+	{
+		cout << "Patient is not yet cured send to another Doctor" << endl;
+		assignDoc(patientLine.top(), fieldIDNextDoc);
+	}
+}
+
+int doctor::areUmyDoc(int fieldID)
+{
+	if(fieldID == doctor::fieldID)
+	{
+		return doctor::patientLine.size();
+	}
+	else
+	{
+		return numeric_limits<int>::max();
+	}
 }
