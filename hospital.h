@@ -48,6 +48,9 @@ public:
 //assigns the patient to the next doctor based on his/her other symptoms.
 void assigndoc(patient p, int fieldID);
 
+vector <doctor> AllDoctors; // a vector containing all the doctors in the hosital. 
+//Since the number of doctors is very less, hashmap for doctors is not required.
+
 //Each doctor is identified by his name, id(remove if not needed) and specialisation
 class doctor{
     string name;
