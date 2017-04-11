@@ -60,3 +60,21 @@ int doctor::areUmyDoc(int fieldID)
 		return numeric_limits<int>::max();
 	}
 }
+
+void assigndoc(patient p, int fieldID)
+{
+	int least_waiting = numeric_limits<int>::max(); // set to max initially
+	docotr myDoctor;
+	
+ 	for (int i=0; i<= AllDoctors.size(), i++) // iterating over all doctors to find the docotr with matching fieldID and minimun waiting
+	{
+	 	int curr_waiting = AllDoctors[i].areUmyDoc(fieldID);
+		if (curr_waiting < least_waiting) 
+		{	least_waiting = curr_waiting;
+			myDocotor = AllDoctors[i]; 
+		}
+	 }
+	
+	myDoctor.addToLine (p);
+
+}
