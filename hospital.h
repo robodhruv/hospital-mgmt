@@ -48,10 +48,11 @@ public:
 //assigns the patient to the next doctor based on his/her other symptoms.
 void assigndoc(patient p, int fieldID);
 
-//Each doctor is identified by his name, id(remove if not needed) and specialisation
+//Each doctor is identified by his name, ID and specialisation ID.
 class doctor{
     string name;
-    int fieldID; // fieldID is an int given to each field of specialization eg. 1 for general physician, 2 for Orthopedic...
+    string ID;
+    int fieldID; // fieldID is an int given to each field of specialization eg. 1 for general physician, 2 for Orthopaedic...
     queue<patient*> patientLine; // queue of the patient waiting to be diagnosed under the doctor. 
     //..$%$%$ I am doubtful if this is how a queue of pointers to patient is implemeneted please check.$%$%$
 public:
