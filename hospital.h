@@ -49,6 +49,10 @@ public:
 void assigndoc(patient p, int fieldID);
 
 //Each doctor is identified by his name, ID and specialisation ID.
+vector <doctor> AllDoctors; // a vector containing all the doctors in the hosital. 
+//Since the number of doctors is very less, hashmap for doctors is not required.
+
+//Each doctor is identified by his name, id(remove if not needed) and specialisation
 class doctor{
     string name;
     string ID;
