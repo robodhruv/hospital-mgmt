@@ -23,6 +23,10 @@ public:
     patient getPatient() {
         return *person;
     }
+    void getID(string &ID) {
+        person -> getID(ID);
+    }
+
     void setName(string fname, string lname) {
         person -> setName(fname, lname); 
     }
