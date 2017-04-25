@@ -119,3 +119,7 @@ void assignDoc(patient * p)
 
 	myDoctor.addToLine (p);
 }
+
+int doctor::get_queue_length() {
+	return patientLine.size();
+}

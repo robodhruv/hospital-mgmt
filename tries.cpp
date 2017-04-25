@@ -187,8 +187,9 @@ int main()
     mytrie.insertPatient(&person1);
     cout<<"2"<<endl;
     vector<patient*> returnSearch(mytrie.searchPatient("parth"));
-    cout<<"3"<<endl;
-    //cout<<"returnSearch Size = "<<returnSearch.size()<<endl;
+
+
+    cout<<"returnSearch Size = "<<returnSearch.size()<<endl;
     for (int i = 0; i < returnSearch.size(); ++i)
     {   
         cout<<i<<endl;

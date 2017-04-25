@@ -11,12 +11,15 @@ Function definitions will be enumerated in separate files.
 */
 
 #include <iostream>
+#include <cstdlib>
 #include <vector>
 #include <stack>
 #include <queue>
 #include <string>
 #include <numeric>
 #include <limits>
+#include "time.h"
+#include <stdlib.h> 
 
 #define TABLE_SIZE 100
 
@@ -85,7 +88,7 @@ class doctor {
     string name;
     string ID;
     int fieldID; // fieldID is an int given to each field of specialization eg. 1 for general physician, 2 for Orthopaedic...
-    queue<patient*> patientLine; // queue of the patient waiting to be diagnosed under the doctor.
+    queue<patient*> patientLine;// queue of the patient waiting to be diagnosed under the doctor.
     //..$%$%$ I am doubtful if this is how a queue of pointers to patient is implemeneted please check.$%$%$
 public:
     void addToLine(patient * p); //adds patient p to the queue of the doctor.
@@ -93,6 +96,7 @@ public:
     int areUmyDoc(patient *p);
     vector<int> whatICanCure;
     void setWhatICanCure ();
+    int get_queue_length();
     //Add accessor and mutator functions
 };
 
@@ -112,3 +116,10 @@ public:
 };
 
 //Followed by declarations for all the search related databases
+
+const string red("\033[0;31m");
+const string green("\033[1;32m");
+const string yellow("\033[1;33m");
+const string cyan("\033[0;36m");
+const string magenta("\033[0;35m");
+const string reset("\033[0m");

@@ -8,7 +8,7 @@ querying patient data from a database efficiently.
  -------------------------------------------------------------------
 */
 
-#include "hospital.h"
+#include "hospi.h"
 
 class HashNode {
 // A node in the 2D hash table. Note that the input does not
@@ -39,7 +39,7 @@ public:
     void setNext (HashNode * next) {
         next = next;
     }
-    
+
 private:
 	patient * person;
 	HashNode * next;
@@ -145,7 +145,3 @@ private:
 	vector<vector<HashNode *> > hash_table ;
 	HashingFn hash_funct;
 };
-
-int main() {
-	return 0;
-}
