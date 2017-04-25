@@ -92,12 +92,13 @@ class doctor {
     //..$%$%$ I am doubtful if this is how a queue of pointers to patient is implemeneted please check.$%$%$
 public:
     //Add accessor and mutator functions
-    void setName(string &name);
+
+    void setName(string name);
     void getName(string &name);
-    void setID(string &id);
+    void setID(string id);
     void getID(string &id);
-    void setFieldID(string &id);
-    void getFieldID(string &id);
+    void setFieldID(int id);
+    void getFieldID(int &id);
     void addToLine(patient * p); //adds patient p to the queue of the doctor.
     void diagnose(patient *p); //Diagnose patient first in the queue and add diagnosis in patient's prescription vector.
     int areUmyDoc(patient *p);
@@ -129,6 +130,7 @@ public:
 const string red("\033[0;31m");
 const string green("\033[1;32m");
 const string yellow("\033[1;33m");
+const string blue("\033[1;34m");
 const string cyan("\033[0;36m");
 const string magenta("\033[0;35m");
 const string reset("\033[0m");
