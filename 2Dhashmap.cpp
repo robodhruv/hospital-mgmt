@@ -85,6 +85,55 @@ public:
         }
 
     }
+
+    void search_patient_fname (string fname, vector<string> &IDs) {
+        int index_f = hash_funct(fname);
+
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            HashNode * entry = hash_table[index_f][i];
+            while (entry != NULL) {
+                string Fname, Lname, ID;
+                hash_table[index_f][i] -> getName(Fname, Lname);
+                hash_table[index_f][i] -> getID(ID);
+                if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;
+                IDs.push_back(ID);
+                entry = entry -> getNext();
+            }
+        }
+    }
+
+    void search_patient_lname (string lname, vector<string> &IDs) {
+        int index_l = hash_funct(lname);
+
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            HashNode * entry = hash_table[i][index_l];
+            while (entry != NULL) {
+                string Fname, Lname, ID;
+                hash_table[i][index_l] -> getName(Fname, Lname);
+                hash_table[i][index_l] -> getID(ID);
+                if (Lname == lname) cout << Fname << " " << Lname << " - " << ID;
+                IDs.push_back(ID);
+                entry = entry -> getNext();
+            }
+        }
+    }
+
+    void search_patient (string fname, string lname,  vector<string> &IDs) {
+        int index_f = hash_funct(fname);
+        int index_l = hash_funct(lname);
+
+        HashNode * entry = hash_table[index_f][index_l];
+        while (entry != NULL) {
+            string Fname, Lname, ID;
+            hash_table[index_f][index_l] -> getName(Fname, Lname);
+            hash_table[index_f][index_l] -> getID(ID);
+            if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;
+            IDs.push_back(ID);
+            entry = entry -> getNext();
+        }
+    }
+
+
 private:
     vector<vector<HashNode *>> hash_table ;
     HashingFn hash_funct;
