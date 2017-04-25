@@ -15,7 +15,7 @@ class HashNode {
 // require an extra key as the name is a part of the value.
 public:
     HashNode (patient *person):
-    person(person), next(NULL) {
+        person(person), next(NULL) {
     }
     void getName(string &fname, string &lname) {
         person -> getName(fname, lname);
