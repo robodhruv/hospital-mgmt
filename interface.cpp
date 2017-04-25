@@ -47,24 +47,24 @@ void initialisePatients() {
 	patient P2;
 	P2.setName("Pranav", "Kulkarni");
 	P2.setID("11");
-	P2.setSymptoms("Fracture");
+	P2.setSymptoms("Cough");
 
 	patient P3;
-	P2.setName("Shashwat", "Shukla");
-	P2.setID("69");
-	P2.setSymptoms("Alzheimer");
+	P3.setName("Shashwat", "Shukla");
+	P3.setID("69");
+	P3.setSymptoms("Fracture");
 
 	patient P4;
-	P2.setName("Parth", "Jatakia");
-	P2.setID("007");
-	P2.setSymptoms("HeartPain");
+	P4.setName("Parth", "Jatakia");
+	P4.setID("007");
+	P4.setSymptoms("HeartPain");
 
 	assignDoc(&P1);
 	assignDoc(&P1);
 	assignDoc(&P1);
-	assignDoc(&P1);
-	assignDoc(&P1);
 
+
+	assignDoc(&P2);
 	assignDoc(&P2);
 	assignDoc(&P2);
 	assignDoc(&P2);
@@ -77,7 +77,7 @@ void initialisePatients() {
 
 	assignDoc(&P3);
 
-	// assignDoc(&P4);
-	// assignDoc(&P4);
-	// assignDoc(&P4);
+	assignDoc(&P4);
+	assignDoc(&P4);
+
 }
