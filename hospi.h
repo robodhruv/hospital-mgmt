@@ -73,31 +73,36 @@ void initialiseDoctors();
 	d1.setName("Physician A");
 	d1.setID ("a");
 	d1.setFieldID(1);
+	d1.setWhatICanCure();
 	AllDoctors.push_back(d1);
 
 	doctor d2;
-	d1.setName("Physician B");
-	d1.setID ("b");
-	d1.setFieldID(1);
+	d2.setName("Physician B");
+	d2.setID ("b");
+	d2.setFieldID(1);
+	d2.setWhatICanCure();
 	AllDoctors.push_back(d2);
 
 	doctor d3;
-	d1.setName("Orthopedic");
-	d1.setID ("c");
-	d1.setFieldID(2);
-	AllDoctors.push_back(d1);
+	d3.setName("Orthopedic");
+	d3.setID ("c");
+	d3.setFieldID(2);
+	d3.setWhatICanCure();
+	AllDoctors.push_back(d3);
 
 	doctor d4;
-	d1.setName("Cardiologist");
-	d1.setID ("d");
-	d1.setFieldID(1);
-	AllDoctors.push_back(d1);
+	d4.setName("Cardiologist");
+	d4.setID ("d");
+	d4.setFieldID(1);
+	d4.setWhatICanCure();
+	AllDoctors.push_back(d4);
 
 	doctor d5;
-	d1.setName("Neurologist");
-	d1.setID ("e");
-	d1.setFieldID(1);
-	AllDoctors.push_back(d1);
+	d5.setName("Neurologist");
+	d5.setID ("e");
+	d5.setFieldID(1);
+	d5.setWhatICanCure();
+	AllDoctors.push_back(d5);
 }
 
 void doctor::addToLine(patient * p)
