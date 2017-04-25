@@ -36,11 +36,6 @@ queue<patient> Reception;
 //Each patient has relevant attributes
 class patient {
     string fname, lname, ID; //Identity of the patient
-    // Cough(0), Fever(1), Diarrhea(2) -> Physician A, Physician B
-    // Fracture(3), MuscleInjury (4) -> Orthopedic
-    // HeartPain (5) -> Cardiologist
-    // Alzheimer (6) -> Neurologist
-    stack<string> doctors; //Doctors the patient must visit based on his symptoms. Keep popping docs till empty
     vector<diagnosis> prescription; //Diagnosed disease and corresponding treatement for the patient
 public:
     vector<int> symptoms; //Symptoms displayed by the patient. Change to stack if needed
@@ -49,7 +44,6 @@ public:
     void setName(string fname, string lname);
     void setSymptoms(string symptoms);
     void addPrescription(diagnosis prescript);
-    //Add accessor and mutator functions
 };
 
 string toSympString(int i)
@@ -79,6 +73,12 @@ int toSympInt (string s)
 //As of now, they are assigned to one doctor, despite having multiple symptoms. This doctor then
 //assigns the patient to the next doctor based on his/her other symptoms.
 //Each doctor is identified by his name, ID and specialisation ID.
+
+
+// Cough(0), Fever(1), Diarrhea(2) -> Physician A, Physician B
+    // Fracture(3), MuscleInjury (4) -> Orthopedic
+    // HeartPain (5) -> Cardiologist
+    // Alzheimer (6) -> Neurologist
 
 vector <doctor> AllDoctors; // a vector containing all the doctors in the hospital.
 
