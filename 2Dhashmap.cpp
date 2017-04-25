@@ -8,7 +8,7 @@ querying patient data from a database efficiently.
  -------------------------------------------------------------------
 */
 
-#include "hospi.h"
+#include "hospital.h"
 
 class HashNode {
 // A node in the 2D hash table. Note that the input does not
@@ -20,8 +20,8 @@ public:
     void getName(string &fname, string &lname) {
         person -> getName(fname, lname);
     }
-    patient getPatient() {
-        return *person;
+    patient * getPatient() {
+        return person;
     }
     void getID(string &ID) {
         person -> getID(ID);
@@ -56,7 +56,7 @@ struct HashingFn {
 class HashMap_2D {
 public:
     HashMap_2D() {
-        vector<vector<HashNode *>> hash_table(TABLE_SIZE, vector<HashNode *>
+        vector<vector<HashNode *> > hash_table(TABLE_SIZE, vector<HashNode *>
             (TABLE_SIZE, NULL));
     }
     ~HashMap_2D() {
@@ -90,7 +90,7 @@ public:
 
     }
 
-    void search_patient_fname (string fname, vector<string> &IDs) {
+    void search_patient_fname (string fname, vector<string> &IDs, vector<patient *> &patients) {
         int index_f = hash_funct(fname);
 
         for (int i = 0; i < TABLE_SIZE; i++) {
@@ -99,6 +99,7 @@ public:
                 string Fname, Lname, ID;
                 hash_table[index_f][i] -> getName(Fname, Lname);
                 hash_table[index_f][i] -> getID(ID);
+                patients.push_back(hash_table[index_f][i] -> getPatient());
                 if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;
                 IDs.push_back(ID);
                 entry = entry -> getNext();
@@ -106,7 +107,7 @@ public:
         }
     }
 
-    void search_patient_lname (string lname, vector<string> &IDs) {
+    void search_patient_lname (string lname, vector<string> &IDs, vector<patient *> &patients) {
         int index_l = hash_funct(lname);
 
         for (int i = 0; i < TABLE_SIZE; i++) {
@@ -115,6 +116,7 @@ public:
                 string Fname, Lname, ID;
                 hash_table[i][index_l] -> getName(Fname, Lname);
                 hash_table[i][index_l] -> getID(ID);
+                patients.push_back(hash_table[i][index_l] -> getPatient());
                 if (Lname == lname) cout << Fname << " " << Lname << " - " << ID;
                 IDs.push_back(ID);
                 entry = entry -> getNext();
@@ -122,7 +124,7 @@ public:
         }
     }
 
-    void search_patient (string fname, string lname,  vector<string> &IDs) {
+    void search_patient (string fname, string lname,  vector<string> &IDs, vector<patient *> &patients) {
         int index_f = hash_funct(fname);
         int index_l = hash_funct(lname);
 
@@ -131,6 +133,7 @@ public:
             string Fname, Lname, ID;
             hash_table[index_f][index_l] -> getName(Fname, Lname);
             hash_table[index_f][index_l] -> getID(ID);
+            patients.push_back(hash_table[index_f][index_l] -> getPatient());
             if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;
             IDs.push_back(ID);
             entry = entry -> getNext();
@@ -139,7 +142,7 @@ public:
 
 
 private:
-    vector<vector<HashNode *>> hash_table ;
+    vector<vector<HashNode *> > hash_table ;
     HashingFn hash_funct;
 };
 

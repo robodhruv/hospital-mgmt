@@ -10,6 +10,8 @@ in the header file "hospital.h"
 
 #include "hospital.h"
 
+void assignDoc(patient * p, int fieldID);
+
 //.......Patient Functions..........//
 void patient::getName(string &fname, string &lname) 
 {
@@ -61,20 +63,19 @@ int doctor::areUmyDoc(int fieldID)
 	}
 }
 
-void assigndoc(patient * p, int fieldID)
+void assignDoc(patient * p, int fieldID)
 {
 	int least_waiting = numeric_limits<int>::max(); // set to max initially
 	doctor myDoctor;
 	
- 	for (int i=0; i<= AllDoctors.size(), i++) // iterating over all doctors to find the doctor with matching fieldID and minimun waiting
+ 	for (int i=0; i<= AllDoctors.size(); i++) // iterating over all doctors to find the doctor with matching fieldID and minimun waiting
 	{
 	 	int curr_waiting = AllDoctors[i].areUmyDoc(fieldID);
 		if (curr_waiting < least_waiting) 
 		{	least_waiting = curr_waiting;
 			myDoctor = AllDoctors[i]; 
 		}
-	 }
+	}
 	
 	myDoctor.addToLine (p);
-
 }

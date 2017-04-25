@@ -40,16 +40,18 @@ public:
     void getName(string &fname, string &lname);
     void getID(string &id);
     void setName(string fname, string lname);
+    void setSymptoms(string symptoms);
+    void addPrescription(diagnosis prescript);
     //Add accessor and mutator functions
 };
 
 //At the reception, the patients are assigned to a doctor based on their symptoms.
 //As of now, they are assigned to one doctor, despite having multiple symptoms. This doctor then 
 //assigns the patient to the next doctor based on his/her other symptoms.
-void assigndoc(patient p, int fieldID);
-
 //Each doctor is identified by his name, ID and specialisation ID.
+
 vector <doctor> AllDoctors; // a vector containing all the doctors in the hosital. 
+
 //Since the number of doctors is very less, hashmap for doctors is not required.
 
 //Each doctor is identified by his name, id(remove if not needed) and specialisation
@@ -68,6 +70,7 @@ public:
 
 //Doctors diagnose the patient to identify the disease and the corresponding treatment
 class diagnosis{
+public:
     string disease, treatment;
 };
 
