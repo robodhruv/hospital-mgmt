@@ -78,8 +78,7 @@ void doctor::setFieldID(int id)
 	doctor::fieldID = id ;
 }
 
-void initialiseDoctors();
-{
+void initialiseDoctors() {
 	doctor d1;
 	d1.setName("Physician A");
 	d1.setID ("a");
@@ -104,14 +103,14 @@ void initialiseDoctors();
 	doctor d4;
 	d4.setName("Cardiologist");
 	d4.setID ("d");
-	d4.setFieldID(1);
+	d4.setFieldID(3);
 	d4.setWhatICanCure();
 	AllDoctors.push_back(d4);
 
 	doctor d5;
 	d5.setName("Neurologist");
 	d5.setID ("e");
-	d5.setFieldID(1);
+	d5.setFieldID(4);
 	d5.setWhatICanCure();
 	AllDoctors.push_back(d5);
 }
@@ -119,12 +118,14 @@ void initialiseDoctors();
 void doctor::addToLine(patient * p)
 {
 	doctor::patientLine.push(p);
-	cout << "Patient added to waiting line for Dr. " << doctor::name << endl;
+	string fname, lname;
+	p -> getName(fname, lname);
+	cout << "Patient " <<  fname << " added to waiting line for Dr. " << doctor::name << endl;
 }
 
 void doctor::setWhatICanCure ()
 {
-	if (doctor::fieldID == 1 ) { 
+	if (doctor::fieldID == 1) { 
 		doctor::whatICanCure.push_back(0); 
 		doctor::whatICanCure.push_back(1);
 		doctor::whatICanCure.push_back(2);
@@ -150,14 +151,14 @@ void doctor::diagnose(patient * p)
 {
 	for (int i=0; i<doctor::whatICanCure.size();i++)
 	{
-		for (int j=0; j<p->symptoms.size(); j++)
+		for (int j = 0; j < p->symptoms.size(); j++)
 		{
 			if (i==j)
 			{
 				diagnosis diag;
 				diag.disease = toSympString(p->symptoms[j]);
 				diag.treatment = "Tablets given for 5 days";
-				p -> symptoms.erase(p->symptoms.begin()+j);
+				p -> symptoms.erase(p -> symptoms.begin()+j);
 				p -> addPrescription(diag);
 
 			}
@@ -173,12 +174,12 @@ if (p->symptoms.size()!=0)
 }
 
 int doctor::areUmyDoc(patient * p)
-{
-	for (int i=0; i<doctor::whatICanCure.size(); i++)
+{	
+	for (int i=0; i < doctor::whatICanCure.size(); i++)
 	{
-		for (int j=0; j<p->symptoms.size(); j++)
+		for (int j=0; j < p -> symptoms.size(); j++)
 		{
-			if (i==j)
+			if (doctor::whatICanCure[i] == p -> symptoms[j])
 			{
 				return doctor::patientLine.size();
 			}
@@ -193,17 +194,18 @@ void assignDoc(patient * p)
 {
 	int least_waiting = numeric_limits<int>::max(); // set to max initially
 	doctor myDoctor;
-
-	for (int i = 0; i <= AllDoctors.size(); i++) // iterating over all doctors to find the doctor with matching fieldID and minimun waiting
+	int min_i = numeric_limits<int>::max();
+	for (int i = 0; i < AllDoctors.size(); i++) // iterating over all doctors to find the doctor with matching fieldID and minimun waiting
 	{
 		int curr_waiting = AllDoctors[i].areUmyDoc(p);
 		if (curr_waiting < least_waiting)
 		{	least_waiting = curr_waiting;
 			myDoctor = AllDoctors[i];
+			min_i = i;
 		}
 	}
-
-	myDoctor.addToLine (p);
+	myDoctor.addToLine(p);
+	AllDoctors[min_i] = myDoctor;
 }
 
 int doctor::get_queue_length() {

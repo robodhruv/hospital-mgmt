@@ -2,28 +2,82 @@
 
 void generate_line(doctor doc);
 string get_color(int len);
+void initialisePatients();
 
 int main() {
+	initialiseDoctors();
+	initialisePatients();
+	int num_docs = AllDoctors.size();
+	system("clear");
+	
+	cout << cyan << "Welcome to the Hospital Management System!\n\n\n" << reset;
 
-
-	num_docs = AllDoctors.size();
 	for (int i = 0; i < num_docs; i++) {
+		string name;
+		AllDoctors[i].getName(name);
+		cout << blue << name << reset << ":\t\t";
 		generate_line(AllDoctors[i]);
 	}
+	cout << "\n\n\n\n\n\n";
 }
 
 void generate_line(doctor doc) {
 	string color = get_color(doc.get_queue_length());
-
+	int max_length = 7;
 	cout <<"[ " << color;
-	for (int i = 0; i < doc.get_queue_length(); i++) {
-		cout << " | ";
+	for (int i = 0; i < max_length; i++) {
+		if (i < doc.get_queue_length())	cout << " + ";
+		else cout << "   ";
 	}
-	cout << reset << " ]";
+	cout << reset << " ]" << endl;
 }
 
 string get_color(int len) {
 	if (len < 3) return green;
 	else if (len < 5) return blue;
 	else return red;
+}
+
+void initialisePatients() {
+	patient P1;
+	P1.setName("Dhruv", "Shah");
+	P1.setID("42");
+	P1.setSymptoms("Alzheimer");
+
+	patient P2;
+	P2.setName("Pranav", "Kulkarni");
+	P2.setID("11");
+	P2.setSymptoms("Fracture");
+
+	patient P3;
+	P2.setName("Shashwat", "Shukla");
+	P2.setID("69");
+	P2.setSymptoms("Alzheimer");
+
+	patient P4;
+	P2.setName("Parth", "Jatakia");
+	P2.setID("007");
+	P2.setSymptoms("HeartPain");
+
+	assignDoc(&P1);
+	assignDoc(&P1);
+	assignDoc(&P1);
+	assignDoc(&P1);
+	assignDoc(&P1);
+
+	assignDoc(&P2);
+	assignDoc(&P2);
+	assignDoc(&P2);
+	assignDoc(&P2);
+	assignDoc(&P2);
+	assignDoc(&P2);
+	assignDoc(&P2);
+	assignDoc(&P2);
+	assignDoc(&P2);
+
+	assignDoc(&P3);
+
+	// assignDoc(&P4);
+	// assignDoc(&P4);
+	// assignDoc(&P4);
 }
