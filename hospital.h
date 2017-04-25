@@ -92,12 +92,12 @@ class doctor {
     //..$%$%$ I am doubtful if this is how a queue of pointers to patient is implemeneted please check.$%$%$
 public:
     //Add accessor and mutator functions
-    void doctor::setName(string &name);
-    void doctor::getName(string &name);
-    void doctor::setID(string &id);
-    void doctor::getID(string &id);
-    void doctor::setFieldID(string &id);
-    void doctor::getFieldID(string &id);
+    void setName(string &name);
+    void getName(string &name);
+    void setID(string &id);
+    void getID(string &id);
+    void setFieldID(string &id);
+    void getFieldID(string &id);
     void addToLine(patient * p); //adds patient p to the queue of the doctor.
     void diagnose(patient *p); //Diagnose patient first in the queue and add diagnosis in patient's prescription vector.
     int areUmyDoc(patient *p);

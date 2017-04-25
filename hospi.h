@@ -104,8 +104,11 @@ void doctor::diagnose(patient * p)
 		{
 			if (i==j)
 			{
-				cout << "Patient has been cured for symptom :" << toSympString(p->symptoms[j]) << endl;
+				diagnosis diag;
+				diag.disease = toSympString(p->symptoms[j]);
+				diag.treatment = "Tablets given for 5 days";
 				p->symptoms.erase(p->symptoms.begin()+j);
+				p->diagnosis.push_back(diag);
 
 			}
 		}
