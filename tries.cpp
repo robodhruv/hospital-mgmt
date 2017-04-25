@@ -59,8 +59,8 @@ void patient::setID(string id)
 
 struct node
 {
-    struct node * parent = NULL;
-    struct node * children[letterSet] = {} ;
+    struct node * parent;
+    struct node * children[letterSet];
     vector<patient*> list;
 };
 
@@ -75,7 +75,7 @@ class trie
             string fname, lname, name; 
             newpatient->getName(fname, lname);
             name = fname+lname;
-
+            cout<<name<<endl;
             int i = 0 ;
             while (name[i]!='\0')
             {     
@@ -83,12 +83,13 @@ class trie
                     treeNode->children[name[i] - origin] = (struct node *) malloc(sizeof(struct node));
                     treeNode->children[name[i]-origin]->parent = treeNode;  // Assigning parent
             }
-
+            cout<<i<<endl;
             treeNode = treeNode->children[name[i]-origin];
             i++;
             }
 
             treeNode->list.push_back(newpatient);  
+            cout<<"insertion successfull"<<endl;
         }
 
         vector<patient*> searchPatient(string name)
@@ -182,16 +183,19 @@ int main()
     person1.setID("1");
     cout<<"1"<<endl;
     trie mytrie;
+    cout<<"2"<<endl;
     mytrie.insertPatient(&person1);
     cout<<"2"<<endl;
-    vector<patient*> returnSearch = mytrie.searchPatient("parth");
+    vector<patient*> returnSearch(mytrie.searchPatient("parth"));
     cout<<"3"<<endl;
+    //cout<<"returnSearch Size = "<<returnSearch.size()<<endl;
     for (int i = 0; i < returnSearch.size(); ++i)
-    {
+    {   
+        cout<<i<<endl;
         string lname,fname;
         returnSearch[i]->getName(fname,lname);
         cout<<fname<<" "<<lname<<endl;
-        cout<<i<<endl;
+        
     }
     return 0;
 }
