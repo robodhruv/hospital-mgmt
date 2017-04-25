@@ -1,7 +1,7 @@
 /*
 Implementation of IITB Hospital Management System in C++.
-This file contains implementation Of Tries for quick searching of 
-patients whose full names are not known. 
+This file contains implementation Of Tries for quick searching of
+patients whose full names are not known.
  -------------------------------------------------------------------
 | Shashwat Shukla, Dhruv Ilesh Shah, Parth Jatakia, Pranav Kulkarni.|
 | CS213(M) - Data Structures and Algorithms, Spring 2017.           |
@@ -16,6 +16,7 @@ patients whose full names are not known.
 #include <string>
 #include <numeric>
 #include <limits>
+#include <stdlib.h>
 
 //The name inputted should contain no spaces and if there are they will be removed by the code
 
@@ -61,142 +62,161 @@ struct node
 {
     struct node * parent;
     struct node * children[letterSet];
-    vector<patient*> list;
+    vector<patient*> entries;
 };
 
-class trie 
+class trie
 {
-        node root;
+    node root;
 
-    public:
-        void insertPatient(patient * newpatient)
+public:
+
+    trie() {
+        root.parent = NULL;
+        for (int i = 0; i < letterSet; i++) {
+            root.children[i] = NULL;
+        }
+    }
+    void insertPatient(patient * newpatient)
+    {
+        node * treeNode = &(trie :: root);
+        string fname, lname, name;
+        newpatient->getName(fname, lname);
+        name = fname + lname;
+        cout << name << endl;
+        int i = 0 ;
+        while (i < name.length())
         {
-            node * treeNode = &(trie :: root);
-            string fname, lname, name; 
-            newpatient->getName(fname, lname);
-            name = fname+lname;
-            cout<<name<<endl;
-            int i = 0 ;
-            while (name[i]!='\0')
-            {     
-                if (treeNode->children[name[i] - origin] == NULL) {
-                    treeNode->children[name[i] - origin] = (struct node *) malloc(sizeof(struct node));
-                    treeNode->children[name[i]-origin]->parent = treeNode;  // Assigning parent
+            if (treeNode->children[name[i] - origin] == NULL) {
+                treeNode->children[name[i] - origin] = new node;
+                treeNode->children[name[i] - origin]->parent = NULL;
+                for (int j = 0; j < letterSet; j++) {
+                    treeNode->children[name[i] - origin]->children[j] = NULL;
+                }
+                treeNode->children[name[i] - origin]->parent = treeNode; // Assigning parent
             }
-            cout<<i<<endl;
-            treeNode = treeNode->children[name[i]-origin];
+
+            treeNode = treeNode->children[name[i] - origin];
             i++;
-            }
-
-            treeNode->list.push_back(newpatient);  
-            cout<<"insertion successfull"<<endl;
         }
 
-        vector<patient*> searchPatient(string name)
-        {
-            vector<patient*> result;
-            struct node * treeNode = &(trie :: root);
-            int i = 0;
-            bool found = 1;
-            while (name[i] != '\0') 
-            {
-                if (treeNode->children[name[i] - origin] != NULL) 
-                {
-                    treeNode = treeNode->children[name[i] - origin];
-                    i++;
-                } 
-                else 
-                {
-                    found = 0;
-                    break;
-                }
-            }
+        treeNode->entries.push_back(newpatient);
+        cout << "Insertion Successful" << endl;
+    }
 
-            if (found)
+    vector<patient*> searchPatient(string name)
+    {
+        vector<patient*> result;
+        struct node * treeNode = &root;
+        int i = 0;
+        bool found = 1;
+        while (name[i] != '\0')
+        {
+            if (treeNode->children[name[i] - origin] != NULL)
             {
-                queue<node*> BFSnodes;
-                BFSnodes.push(treeNode);
-                while(!BFSnodes.empty())
-                {
-                    struct node* treeNode = BFSnodes.front();
-                    BFSnodes.pop();
-                    result.insert(std::end(result),std::begin(treeNode->list),std::end(treeNode->list));
-                    for(int j = 0; j< 26;j++)
-                        {
-                        if(treeNode->children[i]!= NULL)
-                        {
-                            BFSnodes.push(treeNode->children[i]);
-                        }
-                    }
-                }
-                return result;
-            } 
-            else {
-                return result;
+                treeNode = treeNode->children[name[i] - origin];
+                i++;
+            }
+            else
+            {
+                found = 0;
+                break;
             }
         }
 
-        void removePatient(patient *Rpatient)
+        if (found)
         {
-            string fname, lname, name; 
-            Rpatient->getName(fname, lname);
-            name = fname+lname;
-
-            struct node * treeNode = &(trie :: root);
-            int i = 0;
-            bool found = 1;
-            while (name[i] != '\0') 
+            queue<node*> BFSnodes;
+            BFSnodes.push(treeNode);
+            while (!BFSnodes.empty())
             {
-                if (treeNode->children[name[i] - origin] != NULL) {
-                    treeNode = treeNode->children[name[i] - origin];
-                    i++;
-                } 
-                else 
-                {
-                    found = 0;
-                    break;
+                struct node* Nodes = BFSnodes.front();
+                BFSnodes.pop();
+                for (int i = 0; i < Nodes->entries.size(); i++) {
+                    result.push_back(Nodes->entries[i]);
                 }
-            }
-
-            if (found)
-            {
-                for(vector<patient*>::iterator itr = treeNode->list.begin(); itr != treeNode->list.end(); itr++)
+                //result.insert(end(result),begin(Nodes->entries),end(Nodes->entries));
+                for (int i = 0; i < letterSet; i++)
                 {
-                    string ID1, ID2;
-                    Rpatient->getID(ID1);
-                    patient *temp = *itr;
-                    temp->getID(ID2);
-                    if(ID1 == ID2)
+                    if (Nodes->children[i] != NULL)
                     {
-                        treeNode->list.erase(itr);
+                        BFSnodes.push(Nodes->children[i]);
                     }
                 }
             }
+            return result;
         }
+        else {
+            return result;
+        }
+    }
+
+    void removePatient(patient *Rpatient)
+    {
+        string fname, lname, name;
+        Rpatient->getName(fname, lname);
+        name = fname + lname;
+
+        struct node * treeNode = &(trie :: root);
+        int i = 0;
+        bool found = 1;
+        while (name[i] != '\0')
+        {
+            if (treeNode->children[name[i] - origin] != NULL) {
+                treeNode = treeNode->children[name[i] - origin];
+                i++;
+            }
+            else
+            {
+                found = 0;
+                break;
+            }
+        }
+
+        if (found)
+        {
+            for (vector<patient*>::iterator itr = treeNode->entries.begin(); itr != treeNode->entries.end(); itr++)
+            {
+                string ID1, ID2;
+                Rpatient->getID(ID1);
+                patient *temp = *itr;
+                temp->getID(ID2);
+                if (ID1 == ID2)
+                {
+                    treeNode->entries.erase(itr);
+                }
+            }
+        }
+    }
 
 };
 
 int main()
 {
     patient person1;
-    person1.setName("parth","jatakia");
+    person1.setName("parth", "jatakia");
     person1.setID("1");
-    cout<<"1"<<endl;
+    patient person2;
+    person2.setName("parth", "jataki");
+    person2.setID("2");
+    cout << "1" << endl;
     trie mytrie;
-    cout<<"2"<<endl;
+    cout << "2" << endl;
     mytrie.insertPatient(&person1);
+
     cout<<"2"<<endl;
     vector<patient*> returnSearch(mytrie.searchPatient("parth"));
 
 
     cout<<"returnSearch Size = "<<returnSearch.size()<<endl;
+
     for (int i = 0; i < returnSearch.size(); ++i)
-    {   
-        cout<<i<<endl;
-        string lname,fname;
-        returnSearch[i]->getName(fname,lname);
-        cout<<fname<<" "<<lname<<endl;
-        
+    {
+        cout << i << endl;
+        string lname, fname;
+        returnSearch[i]->getName(fname, lname);
+        cout << fname << " " << lname << endl;
+
     }
     return 0;
 }

@@ -36,6 +36,39 @@ void patient::setSymptoms (string symp)
 }
 
 //.......Doctor Functions..........//
+
+void doctor::setName(string &name)
+{
+	doctor::name = name;
+}
+
+void doctor::getName(string &name)
+{
+	fname = doctor::name;
+}
+
+void doctor::setID(string &id)
+{
+	id = patient::ID;
+}
+
+void doctor::getID(string &id)
+{
+	doctor::ID = id ;
+}
+
+void doctor::setFieldID(string &id)
+{
+	id = patient::fieldID;
+}
+
+void doctor::getFieldID(string &id)
+{
+	doctor::fieldID = id ;
+}
+
+
+
 void doctor::addToLine(patient * p)
 {
 	doctor::patientLine.push(p);
@@ -44,21 +77,21 @@ void doctor::addToLine(patient * p)
 
 void doctor::setWhatICanCure ()
 {
-	if (fieldID == 1 || fieldID == 2) { 
-		whatICanCure.push_back(0); 
-		whatICanCure.push_back(1);
-		whatICanCure.push_back(2);
+	if (doctor::fieldID == 1 || doctor::fieldID == 2) { 
+		doctor::whatICanCure.push_back(0); 
+		doctor::whatICanCure.push_back(1);
+		doctor::whatICanCure.push_back(2);
 	}
 
-	if (fieldID == 3) { 
-		whatICanCure.push_back(3); 
-		whatICanCure.push_back(4);
+	if (doctor::fieldID == 3) { 
+		doctor::whatICanCure.push_back(3); 
+		doctor::whatICanCure.push_back(4);
 	}
-	if (fieldID == 4) { 
-		whatICanCure.push_back(5); 
+	if (doctor::fieldID == 4) { 
+		doctor::whatICanCure.push_back(5); 
 	}
-	if (fieldID == 5) { 
-		whatICanCure.push_back(6); 
+	if (doctor::fieldID == 5) { 
+		doctor::whatICanCure.push_back(6); 
 	}
 }
 
