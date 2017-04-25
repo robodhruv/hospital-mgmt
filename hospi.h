@@ -13,18 +13,18 @@ in the header file "hospital.h"
 void assignDoc(patient * p, int fieldID);
 
 //.......Patient Functions..........//
-void patient::getName(string &fname, string &lname) 
+void patient::getName(string &fname, string &lname)
 {
 	fname = patient::fname;
 	lname = patient::lname;
 }
 
-void patient::getID(string &id) 
+void patient::getID(string &id)
 {
 	id = patient::ID;
 }
 
-void patient::setName(string fname, string lname) 
+void patient::setName(string fname, string lname)
 {
 	patient::fname = fname;
 	patient::lname = lname;
@@ -34,14 +34,14 @@ void patient::setName(string fname, string lname)
 void doctor::addToLine(patient * p)
 {
 	doctor::patientLine.push(p);
-	cout<<"Patient added to waiting line for Dr. " << doctor::name << endl;
+	cout << "Patient added to waiting line for Dr. " << doctor::name << endl;
 }
 
 void doctor::diagnose(bool cured, int fieldIDNextDoc)
 {
-	if(cured)
+	if (cured)
 	{
-		cout<<"Patient has been cured"<<endl; // Patients name must also be displayed for this patients getName function should be changed
+		cout << "Patient has been cured" << endl; // Patients name must also be displayed for this patients getName function should be changed
 		doctor::patientLine.pop();
 	}
 	else
@@ -53,7 +53,7 @@ void doctor::diagnose(bool cured, int fieldIDNextDoc)
 
 int doctor::areUmyDoc(int fieldID)
 {
-	if(fieldID == doctor::fieldID)
+	if (fieldID == doctor::fieldID)
 	{
 		return doctor::patientLine.size();
 	}
@@ -67,15 +67,15 @@ void assignDoc(patient * p, int fieldID)
 {
 	int least_waiting = numeric_limits<int>::max(); // set to max initially
 	doctor myDoctor;
-	
- 	for (int i=0; i<= AllDoctors.size(); i++) // iterating over all doctors to find the doctor with matching fieldID and minimun waiting
+
+	for (int i = 0; i <= AllDoctors.size(); i++) // iterating over all doctors to find the doctor with matching fieldID and minimun waiting
 	{
-	 	int curr_waiting = AllDoctors[i].areUmyDoc(fieldID);
-		if (curr_waiting < least_waiting) 
+		int curr_waiting = AllDoctors[i].areUmyDoc(fieldID);
+		if (curr_waiting < least_waiting)
 		{	least_waiting = curr_waiting;
-			myDoctor = AllDoctors[i]; 
+			myDoctor = AllDoctors[i];
 		}
 	}
-	
+
 	myDoctor.addToLine (p);
 }
