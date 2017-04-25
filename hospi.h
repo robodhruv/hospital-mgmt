@@ -126,6 +126,9 @@ void doctor::setWhatICanCure ()
 	}
 }
 
+void patient::addPrescription(diagnosis prescript) {
+	patient::prescription.push_back(prescript);
+}
 
 void doctor::diagnose(patient * p)
 {
@@ -138,8 +141,8 @@ void doctor::diagnose(patient * p)
 				diagnosis diag;
 				diag.disease = toSympString(p->symptoms[j]);
 				diag.treatment = "Tablets given for 5 days";
-				p->symptoms.erase(p->symptoms.begin()+j);
-				p->diagnosis.push_back(diag);
+				p -> symptoms.erase(p->symptoms.begin()+j);
+				p -> addPrescription(diag);
 
 			}
 		}
