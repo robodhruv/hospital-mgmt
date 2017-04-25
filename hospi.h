@@ -37,32 +37,32 @@ void patient::setSymptoms (string symp)
 
 //.......Doctor Functions..........//
 
-void doctor::setName(string &name)
+void doctor::setName(string name)
 {
 	doctor::name = name;
 }
 
 void doctor::getName(string &name)
 {
-	fname = doctor::name;
-}
-
-void doctor::setID(string &id)
-{
-	id = patient::ID;
+	name = doctor::name;
 }
 
 void doctor::getID(string &id)
 {
-	doctor::ID = id ;
+	id = doctor::ID;
 }
 
-void doctor::setFieldID(string &id)
+void doctor::setID(string id)
 {
-	id = patient::fieldID;
+	doctor::ID = id;
 }
 
-void doctor::getFieldID(string &id)
+void doctor::getFieldID(int &id)
+{
+	id = doctor::fieldID;
+}
+
+void doctor::setFieldID(int id)
 {
 	doctor::fieldID = id ;
 }
