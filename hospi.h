@@ -29,9 +29,9 @@ void patient::setName(string fname, string lname)
 }
 
 //.......Doctor Functions..........//
-void doctor::addToLine(patient &p)
+void doctor::addToLine(patient * p)
 {
-	doctor::patientLine.pushback(p);
+	doctor::patientLine.push(p);
 	cout<<"Patient added to waiting line for Dr. " << doctor::name << endl;
 }
 
@@ -45,7 +45,7 @@ void doctor::diagnose(bool cured, int fieldIDNextDoc)
 	else
 	{
 		cout << "Patient is not yet cured send to another Doctor" << endl;
-		assignDoc(patientLine.top(), fieldIDNextDoc);
+		assignDoc(patientLine.front(), fieldIDNextDoc);
 	}
 }
 
@@ -61,17 +61,17 @@ int doctor::areUmyDoc(int fieldID)
 	}
 }
 
-void assigndoc(patient p, int fieldID)
+void assigndoc(patient * p, int fieldID)
 {
 	int least_waiting = numeric_limits<int>::max(); // set to max initially
-	docotr myDoctor;
+	doctor myDoctor;
 	
- 	for (int i=0; i<= AllDoctors.size(), i++) // iterating over all doctors to find the docotr with matching fieldID and minimun waiting
+ 	for (int i=0; i<= AllDoctors.size(), i++) // iterating over all doctors to find the doctor with matching fieldID and minimun waiting
 	{
 	 	int curr_waiting = AllDoctors[i].areUmyDoc(fieldID);
 		if (curr_waiting < least_waiting) 
 		{	least_waiting = curr_waiting;
-			myDocotor = AllDoctors[i]; 
+			myDoctor = AllDoctors[i]; 
 		}
 	 }
 	

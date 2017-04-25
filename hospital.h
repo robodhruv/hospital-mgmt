@@ -60,7 +60,7 @@ class doctor{
     queue<patient*> patientLine; // queue of the patient waiting to be diagnosed under the doctor. 
     //..$%$%$ I am doubtful if this is how a queue of pointers to patient is implemeneted please check.$%$%$
 public:
-    void addToLine(patient &p); //adds patient p to the queue of the doctor.
+    void addToLine(patient * p); //adds patient p to the queue of the doctor.
     void diagnose(bool cured, int fieldIDNextDoc); //Diagnose patient first in the queue and add diagnosis in patient's prescription vector.
     int areUmyDoc(int fieldID);
     //Add accessor and mutator functions
