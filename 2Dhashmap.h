@@ -14,8 +14,9 @@ class HashNode {
 // A node in the 2D hash table. Note that the input does not
 // require an extra key as the name is a part of the value.
 public:
-    HashNode (patient *person):
-        person(person), next(NULL) {
+    HashNode (patient * pat) {
+            person = pat;
+            next = NULL;
     }
     void getName(string &fname, string &lname) {
         person -> getName(fname, lname);
@@ -56,8 +57,9 @@ struct HashingFn {
 class HashMap_2D {
 public:
 	HashMap_2D() {
-		vector<vector<HashNode *> > hash_table(TABLE_SIZE, vector<HashNode *>
+		vector<vector<HashNode *> > table(TABLE_SIZE, vector<HashNode *>
 		                                       (TABLE_SIZE, NULL));
+        hash_table = table;
 	}
 	~HashMap_2D() {
 		// Do we need a destructor?
@@ -66,9 +68,10 @@ public:
 	}
 
 	void insert_patient (patient * pat) {
-		string fname, lname;
-		pat -> getName(fname, lname);
 
+        patient person = *pat;
+		string fname, lname;
+		person.getName(fname, lname);
 		int index_f = hash_funct(fname);
 		int index_l = hash_funct(lname);
 
@@ -100,7 +103,7 @@ public:
 				hash_table[index_f][i] -> getName(Fname, Lname);
 				hash_table[index_f][i] -> getID(ID);
 				patients.push_back(hash_table[index_f][i] -> getPatient());
-				if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;
+				// if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;
 				IDs.push_back(ID);
 				entry = entry -> getNext();
 			}
@@ -117,7 +120,7 @@ public:
 				hash_table[i][index_l] -> getName(Fname, Lname);
 				hash_table[i][index_l] -> getID(ID);
 				patients.push_back(hash_table[i][index_l] -> getPatient());
-				if (Lname == lname) cout << Fname << " " << Lname << " - " << ID;
+				// if (Lname == lname) cout << Fname << " " << Lname << " - " << ID;
 				IDs.push_back(ID);
 				entry = entry -> getNext();
 			}
@@ -129,12 +132,13 @@ public:
 		int index_l = hash_funct(lname);
 
 		HashNode * entry = hash_table[index_f][index_l];
-		while (entry != NULL) {
+
+        while (entry != NULL) {
 			string Fname, Lname, ID;
 			hash_table[index_f][index_l] -> getName(Fname, Lname);
 			hash_table[index_f][index_l] -> getID(ID);
 			patients.push_back(hash_table[index_f][index_l] -> getPatient());
-			if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;
+			// if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;
 			IDs.push_back(ID);
 			entry = entry -> getNext();
 		}
@@ -142,6 +146,6 @@ public:
 
 
 private:
-	vector<vector<HashNode *> > hash_table ;
+	vector<vector<HashNode *> > hash_table;
 	HashingFn hash_funct;
 };

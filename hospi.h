@@ -19,9 +19,20 @@ void patient::getName(string &fname, string &lname)
 	lname = patient::lname;
 }
 
+patient::patient() {
+	patient::fname = "";
+	patient::lname = "";
+	patient::ID = "";
+}
+
 void patient::getID(string &id)
 {
 	id = patient::ID;
+}
+
+void patient::setID(string id)
+{
+	patient::ID = id;
 }
 
 void patient::setName(string fname, string lname)

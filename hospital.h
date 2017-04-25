@@ -44,11 +44,13 @@ class patient {
     vector<diagnosis> prescription; //Diagnosed disease and corresponding treatement for the patient
 public:
     vector<int> symptoms; //Symptoms displayed by the patient. Change to stack if needed
+    patient();
     void getName(string &fname, string &lname);
     void getID(string &id);
     void setName(string fname, string lname);
     void setSymptoms(string symptoms);
     void addPrescription(diagnosis prescript);
+    void setID(string id);
     //Add accessor and mutator functions
 };
 
