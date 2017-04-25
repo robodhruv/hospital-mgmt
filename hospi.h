@@ -67,7 +67,38 @@ void doctor::setFieldID(int id)
 	doctor::fieldID = id ;
 }
 
+void initialiseDoctors();
+{
+	doctor d1;
+	d1.setName("Physician A");
+	d1.setID ("a");
+	d1.setFieldID(1);
+	AllDoctors.push_back(d1);
 
+	doctor d2;
+	d1.setName("Physician B");
+	d1.setID ("b");
+	d1.setFieldID(1);
+	AllDoctors.push_back(d2);
+
+	doctor d3;
+	d1.setName("Orthopedic");
+	d1.setID ("c");
+	d1.setFieldID(2);
+	AllDoctors.push_back(d1);
+
+	doctor d4;
+	d1.setName("Cardiologist");
+	d1.setID ("d");
+	d1.setFieldID(1);
+	AllDoctors.push_back(d1);
+
+	doctor d5;
+	d1.setName("Neurologist");
+	d1.setID ("e");
+	d1.setFieldID(1);
+	AllDoctors.push_back(d1);
+}
 
 void doctor::addToLine(patient * p)
 {
@@ -77,20 +108,20 @@ void doctor::addToLine(patient * p)
 
 void doctor::setWhatICanCure ()
 {
-	if (doctor::fieldID == 1 || doctor::fieldID == 2) { 
+	if (doctor::fieldID == 1 ) { 
 		doctor::whatICanCure.push_back(0); 
 		doctor::whatICanCure.push_back(1);
 		doctor::whatICanCure.push_back(2);
 	}
 
-	if (doctor::fieldID == 3) { 
+	if (doctor::fieldID == 2) { 
 		doctor::whatICanCure.push_back(3); 
 		doctor::whatICanCure.push_back(4);
 	}
-	if (doctor::fieldID == 4) { 
+	if (doctor::fieldID == 3) { 
 		doctor::whatICanCure.push_back(5); 
 	}
-	if (doctor::fieldID == 5) { 
+	if (doctor::fieldID == 4) { 
 		doctor::whatICanCure.push_back(6); 
 	}
 }
