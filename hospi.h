@@ -10,72 +10,112 @@ in the header file "hospital.h"
 
 #include "hospital.h"
 
-void assignDoc(patient * p, int fieldID);
+void assignDoc(patient * p);
 
 //.......Patient Functions..........//
-void patient::getName(string &fname, string &lname) 
+void patient::getName(string &fname, string &lname)
 {
 	fname = patient::fname;
 	lname = patient::lname;
 }
 
-void patient::getID(string &id) 
+void patient::getID(string &id)
 {
 	id = patient::ID;
 }
 
-void patient::setName(string fname, string lname) 
+void patient::setName(string fname, string lname)
 {
 	patient::fname = fname;
 	patient::lname = lname;
+}
+
+void patient::setSymptoms (string symp)
+{
+	patient::symptoms.push_back(toSympInt(symp));
 }
 
 //.......Doctor Functions..........//
 void doctor::addToLine(patient * p)
 {
 	doctor::patientLine.push(p);
-	cout<<"Patient added to waiting line for Dr. " << doctor::name << endl;
+	cout << "Patient added to waiting line for Dr. " << doctor::name << endl;
 }
 
-void doctor::diagnose(bool cured, int fieldIDNextDoc)
+void doctor::setWhatICanCure ()
 {
-	if(cured)
-	{
-		cout<<"Patient has been cured"<<endl; // Patients name must also be displayed for this patients getName function should be changed
-		doctor::patientLine.pop();
+	if (fieldID == 1 || fieldID == 2) { 
+		whatICanCure.push_back(0); 
+		whatICanCure.push_back(1);
+		whatICanCure.push_back(2);
 	}
-	else
+
+	if (fieldID == 3) { 
+		whatICanCure.push_back(3); 
+		whatICanCure.push_back(4);
+	}
+	if (fieldID == 4) { 
+		whatICanCure.push_back(5); 
+	}
+	if (fieldID == 5) { 
+		whatICanCure.push_back(6); 
+	}
+}
+
+
+void doctor::diagnose(patient * p)
+{
+	for (int i=0; i<doctor::whatICanCure.size();i++)
 	{
+		for (int j=0; j<p->symptoms.size(); j++)
+		{
+			if (i==j)
+			{
+				cout << "Patient has been cured for symptom :" << toSympString(p->symptoms[j]) << endl;
+				p->symptoms.erase(p->symptoms.begin()+j);
+
+			}
+		}
+	}
+
+doctor::patientLine.pop();
+if (p->symptoms.size()!=0) 
+{
 		cout << "Patient is not yet cured send to another Doctor" << endl;
-		assignDoc(patientLine.front(), fieldIDNextDoc);
+		assignDoc(p);
 	}
 }
 
-int doctor::areUmyDoc(int fieldID)
+int doctor::areUmyDoc(patient * p)
 {
-	if(fieldID == doctor::fieldID)
+	for (int i=0; i<doctor::whatICanCure.size(); i++)
 	{
-		return doctor::patientLine.size();
+		for (int j=0; j<p->symptoms.size(); j++)
+		{
+			if (i==j)
+			{
+				return doctor::patientLine.size();
+			}
+		}
 	}
-	else
-	{
-		return numeric_limits<int>::max();
-	}
+
+	return numeric_limits<int>::max();
+	
 }
 
-void assignDoc(patient * p, int fieldID)
+void assignDoc(patient * p)
 {
 	int least_waiting = numeric_limits<int>::max(); // set to max initially
 	doctor myDoctor;
-	
- 	for (int i=0; i<= AllDoctors.size(); i++) // iterating over all doctors to find the doctor with matching fieldID and minimun waiting
+
+	for (int i = 0; i <= AllDoctors.size(); i++) // iterating over all doctors to find the doctor with matching fieldID and minimun waiting
 	{
-	 	int curr_waiting = AllDoctors[i].areUmyDoc(fieldID);
-		if (curr_waiting < least_waiting) 
+		int curr_waiting = AllDoctors[i].areUmyDoc(p);
+		if (curr_waiting < least_waiting)
 		{	least_waiting = curr_waiting;
-			myDoctor = AllDoctors[i]; 
+			myDoctor = AllDoctors[i];
 		}
 	}
-	
+
 	myDoctor.addToLine (p);
 }
