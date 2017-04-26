@@ -38,9 +38,9 @@ class patientrecord;
 
 //Each patient has relevant attributes
 class patient {
-    string fname, lname, ID; //Identity of the patient
     vector<diagnosis> prescription; //Diagnosed disease and corresponding treatement for the patient
 public:
+    string fname, lname, ID; //Identity of the patient
     vector<int> symptoms; //Symptoms displayed by the patient. Change to stack if needed
     patient();
     void getName(string &fname, string &lname);
@@ -68,6 +68,7 @@ public:
 vector <doctor> AllDoctors; // a vector containing all the doctors in the hospital.
 queue <string> output_logs;
 vector <patient*> DB_compl;
+
 //Since the number of doctors is very less, hashmap for doctors is not required.
 //Each doctor is identified by his name, id(remove if not needed) and specialisation
 class doctor {

@@ -12,6 +12,9 @@ void edit_patient();
 void examine_queue();
 void emergency();
 void insert_DB(patient * pat);
+void search_by_ID();
+void display_details(patient * pat);
+
 
 void generate_display() {
 	int num_docs = AllDoctors.size();

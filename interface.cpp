@@ -7,7 +7,7 @@ int main() {
 	initialiseDoctors();
 	initialisePatients();
 	generate_actions();
-	//begin_operation();
+	begin_operation();
 }
 
 void begin_operation() {
@@ -22,7 +22,7 @@ void begin_operation() {
 		case '1':
 			add_patient();
 			break;
-		case 2:
+		case '2':
 			search_patient();
 			break;
 		// case 3:
@@ -46,7 +46,53 @@ void begin_operation() {
 
 void search_patient(){
 	cout << "Search by:" << endl;
+	cout << bold << "1. " << reset << " ID" << endl;
+	cout << bold << "2. " << reset << " Name" << endl;
+	cout << bold << "3. " << reset << " Disease" << endl;
 
+	getchar();
+	char action = getchar();
+	loop:
+	switch (action) {
+		case '1':
+			search_by_ID();
+			break;
+		// case '2':
+		// 	search_by_name();
+		// 	break;
+		// case '3':
+		// 	search_by_disease();
+		// 	break;
+		default:
+			cout << "Invalid Input!" << endl;
+			goto loop;
+	}
+}
+
+void search_by_ID() {
+	generate_display();
+	int ID;
+	ID_enter:
+	cout << "Enter Patient ID: ";
+	cin >> ID;
+	cout << DB_compl.size();
+	if (ID >= DB_compl.size()) {
+		cout << "Invalid ID!";
+		goto ID_enter;
+	} else {
+		// patient * pat;
+		// pat = (DB_compl[ID]);
+		display_details(DB_compl[ID]);
+	}
+
+	getchar();
+}
+
+void display_details(patient * pat){
+	string fname, lname;
+	pat -> getName(fname, lname);
+	generate_display();
+	cout << bold << "Name: " << reset << fname << " " << lname;
 }
 
 void insert_DB(patient * pat) {
@@ -56,7 +102,7 @@ void insert_DB(patient * pat) {
 }
 
 void add_patient() {
-	generate_actions();
+	generate_display();
 	string fname, lname, symptoms;
 	cout << "Enter Patient's First Name: ";
 	cin >> fname;
@@ -117,6 +163,7 @@ void initialisePatients() {
 	getchar();
 	assignDoc(&P4);
 	getchar();
+	generate_display();
 
 	// AllDoctors[0].diagnose();
 	// P1.getPrescriptionLenght();
