@@ -33,8 +33,8 @@ loop:
 		// 	examine_queue();
 		// 	break;
 		case '5':
-		 	emergency();
-		 	break;
+			emergency();
+			break;
 		case '0':
 			break;
 		default:
@@ -111,7 +111,7 @@ ID_enter:
 void search_by_name() { //Complete it!
 	generate_display();
 	int choice;
-	string fname, lname, name; 
+	string fname, lname, name;
 	vector<string> IDs;
 	vector<patient*> patients;
 	cout << "Search by:" << endl;
@@ -159,10 +159,10 @@ void search_by_name() { //Complete it!
 		getchar();
 		break;
 	case 4:
-		cout<<"Enter the first few letters of the name: " <<endl; //It is extremely important that only the first part of the name is searched.
+		cout << "Enter the first few letters of the name: " << endl; //It is extremely important that only the first part of the name is searched.
 		cin >> name;
 		patients = hospiDB_tries.searchPatient(name);
-		for(int i=0;i< patients.size();i++){
+		for (int i = 0; i < patients.size(); i++) {
 			string fname1, lname1, id;
 			cout << bold << "ID: " << reset << patients[i] -> ID << endl;
 			cout << bold << "Name: " << reset << patients[i] -> fname << " " << patients[i] -> lname << endl;
@@ -180,7 +180,11 @@ void display_details(patient * pat) {
 	string fname, lname;
 	pat -> getName(fname, lname);
 	generate_display();
-	cout << bold << "Name: " << reset << fname << " " << lname;
+	cout << cyan << bold << "Name: " << reset << cyan << fname << " " << lname << endl;
+	cout << bold << "Logs::" << reset << endl << endl;
+	for (int i = 0; i < (pat -> prescription).size() ; i++) {
+		cout << bold << pat->prescription[i].disease << ": " << reset << pat->prescription[i].treatment << endl;
+	}
 	getchar();
 }
 
@@ -195,7 +199,7 @@ void add_patient() {
 	int choice ;
 	cout << bold << "1. " << reset << "New Patient" << endl;
 	cout << bold << "2. " << reset << "Old Patient" << endl;
-	cin>>choice;
+	cin >> choice;
 	switch (choice) {
 	case 1:// For NEW Patients
 	{	string fname, lname, symptoms;
@@ -216,22 +220,24 @@ void add_patient() {
 		assignDoc(P);
 		insert_DB(P);
 		getchar();
-		break;}
+		break;
+	}
 	case 2:// For OLD Patients
 	{	int ID;
-		ID_enter:
-		cout<<"Enter Patient's ID :"<<endl;
-		cin>>ID;
+ID_enter:
+		cout << "Enter Patient's ID :" << endl;
+		cin >> ID;
 		if (ID >= DB_compl.size()) {
 			cout << "Invalid ID!";
 			goto ID_enter;
-		} 
+		}
 		else {
 			generate_display();
 			assignDoc(DB_compl[ID]);
 			insert_DB(DB_compl[ID]);
 		}
-		break;}
+		break;
+	}
 	}
 }
 
