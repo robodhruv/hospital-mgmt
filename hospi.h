@@ -276,7 +276,7 @@ void Emergency (patient * p)
 	string fname, lname,name;
 	AllDoctors[i].getName( name);
 	p -> getName(fname, lname);
-	output_logs.push("Emergency Patient " + fname + " added to the front of waiting line for Dr. " + name + ".\n");
+	output_logs.push("Emergency Patient added to the front of waiting line for Dr. " + name + ".\n");
 }
 
 int doctor::get_queue_length() {

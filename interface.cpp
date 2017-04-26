@@ -135,8 +135,28 @@ void search_by_name() { //Complete it!
 		getchar();
 		break;
 	case 2:
+		cout << "Enter first name of patient: ";
+		cin >> fname;
+		hospiDB.search_patient_fname(fname, IDs, patients);
+		for (int i = 0; i < patients.size(); i++) {
+			string fname1, lname1, id;
+			cout << bold << "ID: " << reset << patients[i] -> ID << endl;
+			cout << bold << "Name: " << reset << patients[i] -> fname << " " << patients[i] -> lname << endl;
+		}
+		getchar();
+		getchar();
 		break;
 	case 3:
+		cout << "Enter last name of patient: ";
+		cin >> lname;
+		hospiDB.search_patient_lname(lname, IDs, patients);
+		for (int i = 0; i < patients.size(); i++) {
+			string fname1, lname1, id;
+			cout << bold << "ID: " << reset << patients[i] -> ID << endl;
+			cout << bold << "Name: " << reset << patients[i] -> fname << " " << patients[i] -> lname << endl;
+		}
+		getchar();
+		getchar();
 		break;
 	case 4:
 		cout<<"Enter the first few letters of the name: " <<endl; //It is extremely important that only the first part of the name is searched.

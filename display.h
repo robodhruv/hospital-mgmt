@@ -49,6 +49,10 @@ string get_color_log(string log){
 		else {
 			found = log.find("Tablets");
 			if (found != string::npos) return cyan;
+			else {
+				found = log.find("Emergency");
+				if (found != string::npos) return red;
+			}
 		}
 	}
 	return yellow;
