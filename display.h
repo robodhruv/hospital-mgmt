@@ -13,6 +13,7 @@ void examine_queue();
 void emergency();
 void insert_DB(patient * pat);
 void search_by_ID();
+void search_by_name();
 void display_details(patient * pat);
 
 

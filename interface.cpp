@@ -15,7 +15,7 @@ void begin_operation() {
 
 	while (action != 0) {
 		generate_actions();
-	loop:
+loop:
 		cout << "Choose an action to perform. ";
 		action = getchar();
 		switch (action) {
@@ -44,35 +44,35 @@ void begin_operation() {
 	}
 }
 
-void search_patient(){
+void search_patient() {
 	cout << "Search by:" << endl;
 	cout << bold << "1. " << reset << " ID" << endl;
 	cout << bold << "2. " << reset << " Name" << endl;
 	cout << bold << "3. " << reset << " Disease" << endl;
 
-	loop:
-    getchar();
+loop:
+	getchar();
 	char action = getchar();
 	switch (action) {
-		case '1':
-			search_by_ID();
-			break;
-		// case '2':
-		// 	search_by_name();
-		// 	break;
-		// case '3':
-		// 	search_by_disease();
-		// 	break;
-		default:
-			cout << "Invalid Input!" << endl;
-			goto loop;
+	case '1':
+		search_by_ID();
+		break;
+	case '2':
+		search_by_name();
+		break;
+	// case '3':
+	// 	search_by_disease();
+	// 	break;
+	default:
+		cout << "Invalid Input!" << endl;
+		goto loop;
 	}
 }
 
 void search_by_ID() {
 	generate_display();
 	int ID;
-	ID_enter:
+ID_enter:
 	cout << "Enter Patient ID: ";
 	cin >> ID;
 	cout << DB_compl.size();
@@ -87,32 +87,41 @@ void search_by_ID() {
 
 	getchar();
 }
-/*
-void search_by_name(){ //Complete it!
 
+void search_by_name() { //Complete it!
 	generate_display();
 	int choice;
-	string fname;
+	string fname, lname;
 	vector<string> IDs;
 	vector<patient *> patients;
 	cout << "Search by:" << endl;
-	cout << bold << "1. " << reset << " First name" << endl;
-	cout << bold << "2. " << reset << " Last Name" << endl;
-	cout << bold << "3. " << reset << " Substring" << endl;
+	cout << bold << "1. " << reset << " Full Name" << endl;
+	cout << bold << "2. " << reset << " First name" << endl;
+	cout << bold << "3. " << reset << " Last Name" << endl;
+	cout << bold << "4. " << reset << " Substring" << endl;
 	cin >> choice;
-	switch(choice){
-		case 1: //Complete it!
-			cout << "Enter first name of patient: " << endl;
-			cin.getline(fname);
-			hospiDB.search_patient_fname(fname,IDs,patients);
-			break;
-		case 2:
-			break;
+	switch (choice) {
+	case 1: //Complete it!
+		cout << "Enter first name of patient: " << endl;
+		cin >> fname;
+		cout << "Enter last name of patient: " << endl;
+		cin >> lname;
+		hospiDB.search_patient(fname, lname, IDs, patients);
+		for (int i = 0; i < patients.size(); i++) {
+			string fname1, lname1, id;
+			cout << bold << "ID: " << reset << patients[i] -> ID << endl;
+			cout << bold << "Name: " << reset << patients[i] -> fname << " " << patients[i] -> lname << endl;
+		}
+		getchar();
+		getchar();
+		break;
+	case 2:
+		break;
 	}
 
-} */
+}
 
-void display_details(patient * pat){
+void display_details(patient * pat) {
 	string fname, lname;
 	pat -> getName(fname, lname);
 	generate_display();
@@ -170,7 +179,7 @@ void initialisePatients() {
 	patient *P4 = new patient;
 	P4->setName("Parth", "Jatakia");
 	P4->setID("3");
-	P4->setSymptoms("Fever");	
+	P4->setSymptoms("Fever");
 
 	insert_DB(P1);
 	insert_DB(P2);
