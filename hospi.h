@@ -265,7 +265,7 @@ void Emergency (patient * p)
 
 	while (! myDoctor.patientLine.empty())
 	{
-	    patient * q = myDoctor.patientLine.top();
+	    patient * q = myDoctor.patientLine.front();
 	    newPatientLine.push(q);
 	    myDoctor.patientLine.pop();
 	} 
