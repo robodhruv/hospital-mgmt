@@ -50,9 +50,9 @@ void search_patient(){
 	cout << bold << "2. " << reset << " Name" << endl;
 	cout << bold << "3. " << reset << " Disease" << endl;
 
-	getchar();
-	char action = getchar();
 	loop:
+    getchar();
+	char action = getchar();
 	switch (action) {
 		case '1':
 			search_by_ID();
@@ -93,6 +93,7 @@ void display_details(patient * pat){
 	pat -> getName(fname, lname);
 	generate_display();
 	cout << bold << "Name: " << reset << fname << " " << lname;
+	getchar();
 }
 
 void insert_DB(patient * pat) {
@@ -110,94 +111,59 @@ void add_patient() {
 	cout << "Enter Patient's Last Name: ";
 	cin >> lname;
 	generate_actions();
-	patient P;
-	P.setName(fname, lname);
+	patient *P = new patient;
+	P->setName(fname, lname);
 	cout << "Enter Patient's Symptoms: ";
 	cin >> symptoms;
-	P.setSymptoms(symptoms);
+	P->setSymptoms(symptoms);
 
 	generate_actions();
 
-	assignDoc(&P);
-	insert_DB(&P);
+	assignDoc(P);
+	insert_DB(P);
 	getchar();
 }
 
 void initialisePatients() {
-	patient P1;
-	P1.setName("Dhruv", "Shah");
-	P1.setID("1");
-	P1.setSymptoms("Alzheimer");
-	P1.setSymptoms("Fever");
+	patient *P1 = new patient;
+	P1->setName("Dhruv", "Shah");
+	P1->setID("0");
+	P1->setSymptoms("Alzheimer");
+	P1->setSymptoms("Fever");
 
-	patient P2;
-	P2.setName("Pranav", "Kulkarni");
-	P2.setID("2");
-	P2.setSymptoms("Cough");
-	P2.setSymptoms("Fever");
+	patient *P2 = new patient;
+	P2->setName("Pranav", "Kulkarni");
+	P2->setID("1");
+	P2->setSymptoms("Cough");
+	P2->setSymptoms("Fever");
 
-	patient P3;
-	P3.setName("Shashwat", "Shukla");
-	P3.setID("3");
-	P3.setSymptoms("Fracture");
-	P2.setSymptoms("Cough");
+	patient *P3 = new patient;
+	P3->setName("Shashwat", "Shukla");
+	P3->setID("2");
+	P3->setSymptoms("Fracture");
+	P3->setSymptoms("Cough");
 
-	patient P4;
-	P4.setName("Parth", "Jatakia");
-	P4.setID("4");
-	P4.setSymptoms("Fever");
+	patient *P4 = new patient;
+	P4->setName("Parth", "Jatakia");
+	P4->setID("3");
+	P4->setSymptoms("Fever");	
 
-	insert_DB(&P1);
-	insert_DB(&P2);
-	insert_DB(&P3);
-	insert_DB(&P4);
+	insert_DB(P1);
+	insert_DB(P2);
+	insert_DB(P3);
+	insert_DB(P4);
 
-	assignDoc(&P1);
+	assignDoc(P1);
 	generate_display();
 	getchar();
-	assignDoc(&P2);
+	assignDoc(P2);
 	generate_display();
 	getchar();
-	assignDoc(&P3);
+	assignDoc(P3);
 	generate_display();
 	getchar();
-	assignDoc(&P4);
+	assignDoc(P4);
 	getchar();
 	generate_display();
-
-	// AllDoctors[0].diagnose();
-	// P1.getPrescriptionLenght();
-	// P2.getPrescriptionLenght();
-	// P3.getPrescriptionLenght();
-	// P4.getPrescriptionLenght();
-	// getchar();
-
-	// AllDoctors[1].diagnose();
-	// P1.getPrescriptionLenght();
-	// P2.getPrescriptionLenght();
-	// P3.getPrescriptionLenght();
-	// P4.getPrescriptionLenght();
-	// getchar();
-
-	// AllDoctors[2].diagnose();
-	// P1.getPrescriptionLenght();
-	// P2.getPrescriptionLenght();
-	// P3.getPrescriptionLenght();
-	// P4.getPrescriptionLenght();
-	// getchar();
-
-	// AllDoctors[3].diagnose();
-	// P1.getPrescriptionLenght();
-	// P2.getPrescriptionLenght();
-	// P3.getPrescriptionLenght();
-	// P4.getPrescriptionLenght();
-	// getchar();
-
-	// AllDoctors[4].diagnose();
-	// P1.getPrescriptionLenght();
-	// P2.getPrescriptionLenght();
-	// P3.getPrescriptionLenght();
-	// P4.getPrescriptionLenght();
-	// getchar();
 
 }
