@@ -38,9 +38,9 @@ class patientrecord;
 
 //Each patient has relevant attributes
 class patient {
-    vector<diagnosis> prescription; //Diagnosed disease and corresponding treatement for the patient
 public:
     string fname, lname, ID; //Identity of the patient
+    vector<diagnosis> prescription; //Diagnosed disease and corresponding treatement for the patient
     vector<int> symptoms; //Symptoms displayed by the patient. Change to stack if needed
     patient();
     void getName(string &fname, string &lname);
