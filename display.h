@@ -15,7 +15,7 @@ void insert_DB(patient * pat);
 void search_by_ID();
 void search_by_name();
 void display_details(patient * pat);
-
+string get_color_log(string log);
 
 void generate_display() {
 	int num_docs = AllDoctors.size();
@@ -32,19 +32,31 @@ void generate_display() {
 	cout << "\n\n\n\n\n\n";
 
 	for (int i = 0; i < output_logs.size(); i++) {
-		cout << yellow << output_logs.front() << reset;
+		string color = get_color_log(output_logs.front());
+		cout << color << output_logs.front() << reset;
 		output_logs.pop();
 	}
 
 	cout << "\n\n\n\n\n\n";
+}
 
-
-
+string get_color_log(string log){
+	size_t found = log.find("discharged");
+	if (found != string::npos) return green;
+	else {
+		found = log.find("examined");
+		if (found != string::npos) return cyan;
+		else {
+			found = log.find("Tablets");
+			if (found != string::npos) return cyan;
+		}
+	}
+	return yellow;
 }
 
 void generate_actions() {
 	generate_display();
-	cout << bold << "1. " << reset << " Add a new patient." << endl;
+	cout << bold << "1. " << reset << " Add a patient." << endl;
 	cout << bold << "2. " << reset << " Search for a patient." << endl;
 	cout << bold << "3. " << reset << " Edit patient details." << endl;
 	cout << bold << "4. " << reset << " Examine a queue." << endl;

@@ -172,48 +172,67 @@ void insert_DB(patient * pat) {
 
 void add_patient() {
 	generate_display();
-	string fname, lname, symptoms;
-	cout << "Enter Patient's First Name: ";
-	cin >> fname;
-	generate_display();
-	cout << "Enter Patient's Last Name: ";
-	cin >> lname;
-	generate_display();
-	patient *P = new patient;
-	P->setName(fname, lname);
-	cout << "Enter Patient's Symptoms: ";
-	cin >> symptoms;
-	P->setSymptoms(symptoms);
+	int choice ;
+	cout << bold << "1. " << reset << "New Patient" << endl;
+	cout << bold << "2. " << reset << "Old Patient" << endl;
+	cin>>choice;
+	switch (choice) {
+	case 1:// For NEW Patients
+	{	string fname, lname, symptoms;
+		cout << "Enter Patient's First Name: ";
+		cin >> fname;
+		generate_display();
+		cout << "Enter Patient's Last Name: ";
+		cin >> lname;
+		generate_display();
+		patient *P = new patient;
+		P->setName(fname, lname);
+		cout << "Enter Patient's Symptoms: ";
+		cin >> symptoms;
+		P->setSymptoms(symptoms);
 
-	generate_display();
+		generate_display();
 
-	assignDoc(P);
-	insert_DB(P);
-	getchar();
+		assignDoc(P);
+		insert_DB(P);
+		getchar();
+		break;}
+	case 2:// For OLD Patients
+	{	int ID;
+		ID_enter:
+		cout<<"Enter Patient's ID :"<<endl;
+		cin>>ID;
+		if (ID >= DB_compl.size()) {
+			cout << "Invalid ID!";
+			goto ID_enter;
+		} 
+		else {
+			generate_display();
+			assignDoc(DB_compl[ID]);
+			insert_DB(DB_compl[ID]);
+		}
+		break;}
+	}
 }
 
 void initialisePatients() {
 	patient *P1 = new patient;
 	P1->setName("Dhruv", "Shah");
-	P1->setID("0");
 	P1->setSymptoms("Alzheimer");
 	P1->setSymptoms("Fever");
 
 	patient *P2 = new patient;
 	P2->setName("Pranav", "Kulkarni");
-	P2->setID("1");
 	P2->setSymptoms("Cough");
 	P2->setSymptoms("Fever");
 
 	patient *P3 = new patient;
 	P3->setName("Shashwat", "Shukla");
-	P3->setID("2");
 	P3->setSymptoms("Fracture");
 	P3->setSymptoms("Cough");
 
 	patient *P4 = new patient;
 	P4->setName("Parth", "Jatakia");
-	P4->setID("3");
 	P4->setSymptoms("Fever");
 
 	insert_DB(P1);
