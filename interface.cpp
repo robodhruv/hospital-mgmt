@@ -97,9 +97,9 @@ ID_enter:
 void search_by_name() { //Complete it!
 	generate_display();
 	int choice;
-	string fname, lname;
+	string fname, lname, name; 
 	vector<string> IDs;
-	vector<patient *> patients;
+	vector<patient*> patients;
 	cout << "Search by:" << endl;
 	cout << bold << "1. " << reset << " Full Name" << endl;
 	cout << bold << "2. " << reset << " First name" << endl;
@@ -119,13 +119,28 @@ void search_by_name() { //Complete it!
 			cout << bold << "Name: " << reset << patients[i] -> fname << " " << patients[i] -> lname << endl;
 		}
 		getchar();
-		getchar();
 		break;
 	case 2:
 		break;
+	case 3:
+		break;
+	case 4:
+		cout<<"Enter the first few letters of the name: " <<endl; //It is extremely important that only the first part of the name is searched.
+		cin >> name;
+		patients = hospiDB_tries.searchPatient(name);
+		for(int i=0;i< patients.size();i++){
+			string fname1, lname1, id;
+			cout << bold << "ID: " << reset << patients[i] -> ID << endl;
+			cout << bold << "Name: " << reset << patients[i] -> fname << " " << patients[i] -> lname << endl;
+		}
+		getchar();
+		getchar();
+		break;
+
 	}
 
 }
+
 
 void display_details(patient * pat) {
 	string fname, lname;
