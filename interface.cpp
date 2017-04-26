@@ -224,7 +224,8 @@ void add_patient() {
 	}
 	case 2:// For OLD Patients
 	{	int ID;
-ID_enter:
+		string symptoms;
+		ID_enter:
 		cout << "Enter Patient's ID :" << endl;
 		cin >> ID;
 		if (ID >= DB_compl.size()) {
@@ -233,13 +234,25 @@ ID_enter:
 		}
 		else {
 			generate_display();
-			assignDoc(DB_compl[ID]);
-			insert_DB(DB_compl[ID]);
+			if(DB_compl[ID]->symptomsSize()==0){
+				cout << "Enter Patient's Symptoms: ";
+				cin >> symptoms;
+				DB_compl[ID]->setSymptoms(symptoms);
+				assignDoc(DB_compl[ID]);
+				insert_DB(DB_compl[ID]);
+			}
+			else
+			{
+				cout<<"Patient already in the Queue"<<endl;
+				getchar();
+				getchar();
+			}
 		}
 		break;
 	}
-	}
 }
+}
+
 
 void initialisePatients() {
 	patient *P1 = new patient;

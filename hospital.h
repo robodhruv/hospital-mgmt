@@ -50,6 +50,7 @@ public:
     void addPrescription(diagnosis prescript);
     void setID(string id);
     void getPrescriptionLenght();
+    int symptomsSize();
     //Add accessor and mutator function
 };
 
