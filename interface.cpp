@@ -45,7 +45,14 @@ void begin_operation() {
 }
 
 void search_patient(){
-	return;
+	cout << "Search by:" << endl;
+
+}
+
+void insert_DB(patient * pat) {
+	hospiDB.insert_patient(pat);
+	hospiDB_tries.insertPatient(pat);
+	DB_compl.push_back(pat);
 }
 
 void add_patient() {
@@ -63,16 +70,11 @@ void add_patient() {
 	cin >> symptoms;
 	P.setSymptoms(symptoms);
 
-<<<<<<< HEAD
 	generate_actions();
 
 	assignDoc(&P);
-	hospiDB.insert_patient(&P);
-	hospiDB_tries.insertPatient(&P);
+	insert_DB(&P);
 	getchar();
-=======
-	//hospiDB.insert_patient(&P);
->>>>>>> 101773509634b7ec6a2194096adfa4c1f15dc1a6
 }
 
 void initialisePatients() {
@@ -99,14 +101,10 @@ void initialisePatients() {
 	P4.setID("4");
 	P4.setSymptoms("Fever");
 
-	hospiDB_tries.insertPatient(&P1);
-	hospiDB.insert_patient(&P1);
-	hospiDB_tries.insertPatient(&P2);
-	hospiDB.insert_patient(&P2);	
-	hospiDB_tries.insertPatient(&P3);
-	hospiDB.insert_patient(&P3);	
-	hospiDB_tries.insertPatient(&P4);
-	hospiDB.insert_patient(&P4);
+	insert_DB(&P1);
+	insert_DB(&P2);
+	insert_DB(&P3);
+	insert_DB(&P4);
 
 	assignDoc(&P1);
 	generate_display();
@@ -119,35 +117,40 @@ void initialisePatients() {
 	getchar();
 	assignDoc(&P4);
 	getchar();
-	AllDoctors[0].diagnose();
-	P1.getPrescriptionLenght();
-	P2.getPrescriptionLenght();
-	P3.getPrescriptionLenght();
-	P4.getPrescriptionLenght();
-	getchar();
-	AllDoctors[1].diagnose();
-	P1.getPrescriptionLenght();
-	P2.getPrescriptionLenght();
-	P3.getPrescriptionLenght();
-	P4.getPrescriptionLenght();
-	getchar();
-	AllDoctors[2].diagnose();
-	P1.getPrescriptionLenght();
-	P2.getPrescriptionLenght();
-	P3.getPrescriptionLenght();
-	P4.getPrescriptionLenght();
-	getchar();
-	AllDoctors[3].diagnose();
-	P1.getPrescriptionLenght();
-	P2.getPrescriptionLenght();
-	P3.getPrescriptionLenght();
-	P4.getPrescriptionLenght();
-	getchar();
-	AllDoctors[4].diagnose();
-	P1.getPrescriptionLenght();
-	P2.getPrescriptionLenght();
-	P3.getPrescriptionLenght();
-	P4.getPrescriptionLenght();
-	getchar();
+
+	// AllDoctors[0].diagnose();
+	// P1.getPrescriptionLenght();
+	// P2.getPrescriptionLenght();
+	// P3.getPrescriptionLenght();
+	// P4.getPrescriptionLenght();
+	// getchar();
+
+	// AllDoctors[1].diagnose();
+	// P1.getPrescriptionLenght();
+	// P2.getPrescriptionLenght();
+	// P3.getPrescriptionLenght();
+	// P4.getPrescriptionLenght();
+	// getchar();
+
+	// AllDoctors[2].diagnose();
+	// P1.getPrescriptionLenght();
+	// P2.getPrescriptionLenght();
+	// P3.getPrescriptionLenght();
+	// P4.getPrescriptionLenght();
+	// getchar();
+
+	// AllDoctors[3].diagnose();
+	// P1.getPrescriptionLenght();
+	// P2.getPrescriptionLenght();
+	// P3.getPrescriptionLenght();
+	// P4.getPrescriptionLenght();
+	// getchar();
+
+	// AllDoctors[4].diagnose();
+	// P1.getPrescriptionLenght();
+	// P2.getPrescriptionLenght();
+	// P3.getPrescriptionLenght();
+	// P4.getPrescriptionLenght();
+	// getchar();
 
 }

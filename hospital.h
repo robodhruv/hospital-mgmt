@@ -67,6 +67,7 @@ public:
 
 vector <doctor> AllDoctors; // a vector containing all the doctors in the hospital.
 queue <string> output_logs;
+vector <patient*> DB_compl;
 //Since the number of doctors is very less, hashmap for doctors is not required.
 //Each doctor is identified by his name, id(remove if not needed) and specialisation
 class doctor {
@@ -122,3 +123,4 @@ const string reset("\033[0m");
 const string bold("\033[1m");
 
 long int clk = 5;
+long int counter = 0;

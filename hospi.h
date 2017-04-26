@@ -70,7 +70,8 @@ void patient::setName(string fname, string lname)
 	for (auto elem : lname)	lower.push_back(tolower(elem, loc));
 	patient::lname = lower;
 
-	patient::ID = clk;
+	patient::ID = counter;
+	counter++;
 }
 
 void patient::setSymptoms (string symp)
