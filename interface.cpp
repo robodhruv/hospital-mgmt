@@ -15,7 +15,8 @@ void begin_operation() {
 
 	while (action != 0) {
 		generate_actions();
-	loop:
+		clk++;
+loop:
 		cout << "Choose an action to perform. ";
 		action = getchar();
 		switch (action) {
@@ -34,48 +35,53 @@ void begin_operation() {
 		// case 5:
 		// 	emergency();
 		// 	break;
-		case 0:
+		case '0':
 			break;
 		default:
 			cout << action;
 			cout << "Invalid input \n";
 			goto loop;
 		}
+
+		if (clk % 3 == 0) {
+			for (int i = 0; i < AllDoctors.size(); i++) {
+				AllDoctors[i].diagnose();
+			}
+		}
 	}
 }
 
-void search_patient(){
+void search_patient() {
 	cout << "Search by:" << endl;
 	cout << bold << "1. " << reset << " ID" << endl;
 	cout << bold << "2. " << reset << " Name" << endl;
 	cout << bold << "3. " << reset << " Disease" << endl;
 
+loop:
 	getchar();
 	char action = getchar();
-	loop:
 	switch (action) {
-		case '1':
-			search_by_ID();
-			break;
-		// case '2':
-		// 	search_by_name();
-		// 	break;
-		// case '3':
-		// 	search_by_disease();
-		// 	break;
-		default:
-			cout << "Invalid Input!" << endl;
-			goto loop;
+	case '1':
+		search_by_ID();
+		break;
+	case '2':
+		search_by_name();
+		break;
+	// case '3':
+	// 	search_by_disease();
+	// 	break;
+	default:
+		cout << "Invalid Input!" << endl;
+		goto loop;
 	}
 }
 
 void search_by_ID() {
 	generate_display();
 	int ID;
-	ID_enter:
+ID_enter:
 	cout << "Enter Patient ID: ";
 	cin >> ID;
-	cout << DB_compl.size();
 	if (ID >= DB_compl.size()) {
 		cout << "Invalid ID!";
 		goto ID_enter;
@@ -88,11 +94,60 @@ void search_by_ID() {
 	getchar();
 }
 
-void display_details(patient * pat){
+void search_by_name() { //Complete it!
+	generate_display();
+	int choice;
+	string fname, lname, name; 
+	vector<string> IDs;
+	vector<patient*> patients;
+	cout << "Search by:" << endl;
+	cout << bold << "1. " << reset << " Full Name" << endl;
+	cout << bold << "2. " << reset << " First name" << endl;
+	cout << bold << "3. " << reset << " Last Name" << endl;
+	cout << bold << "4. " << reset << " Substring" << endl;
+	cin >> choice;
+	switch (choice) {
+	case 1: //Complete it!
+		cout << "Enter first name of patient: " << endl;
+		cin >> fname;
+		cout << "Enter last name of patient: " << endl;
+		cin >> lname;
+		hospiDB.search_patient(fname, lname, IDs, patients);
+		for (int i = 0; i < patients.size(); i++) {
+			string fname1, lname1, id;
+			cout << bold << "ID: " << reset << patients[i] -> ID << endl;
+			cout << bold << "Name: " << reset << patients[i] -> fname << " " << patients[i] -> lname << endl;
+		}
+		getchar();
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		cout<<"Enter the first few letters of the name: " <<endl; //It is extremely important that only the first part of the name is searched.
+		cin >> name;
+		patients = hospiDB_tries.searchPatient(name);
+		for(int i=0;i< patients.size();i++){
+			string fname1, lname1, id;
+			cout << bold << "ID: " << reset << patients[i] -> ID << endl;
+			cout << bold << "Name: " << reset << patients[i] -> fname << " " << patients[i] -> lname << endl;
+		}
+		getchar();
+		getchar();
+		break;
+
+	}
+
+}
+
+
+void display_details(patient * pat) {
 	string fname, lname;
 	pat -> getName(fname, lname);
 	generate_display();
 	cout << bold << "Name: " << reset << fname << " " << lname;
+	getchar();
 }
 
 void insert_DB(patient * pat) {
@@ -106,98 +161,63 @@ void add_patient() {
 	string fname, lname, symptoms;
 	cout << "Enter Patient's First Name: ";
 	cin >> fname;
-	generate_actions();
+	generate_display();
 	cout << "Enter Patient's Last Name: ";
 	cin >> lname;
-	generate_actions();
-	patient P;
-	P.setName(fname, lname);
+	generate_display();
+	patient *P = new patient;
+	P->setName(fname, lname);
 	cout << "Enter Patient's Symptoms: ";
 	cin >> symptoms;
-	P.setSymptoms(symptoms);
+	P->setSymptoms(symptoms);
 
-	generate_actions();
+	generate_display();
 
-	assignDoc(&P);
-	insert_DB(&P);
+	assignDoc(P);
+	insert_DB(P);
 	getchar();
 }
 
 void initialisePatients() {
-	patient P1;
-	P1.setName("Dhruv", "Shah");
-	P1.setID("1");
-	P1.setSymptoms("Alzheimer");
-	P1.setSymptoms("Fever");
+	patient *P1 = new patient;
+	P1->setName("Dhruv", "Shah");
+	P1->setID("0");
+	P1->setSymptoms("Alzheimer");
+	P1->setSymptoms("Fever");
 
-	patient P2;
-	P2.setName("Pranav", "Kulkarni");
-	P2.setID("2");
-	P2.setSymptoms("Cough");
-	P2.setSymptoms("Fever");
+	patient *P2 = new patient;
+	P2->setName("Pranav", "Kulkarni");
+	P2->setID("1");
+	P2->setSymptoms("Cough");
+	P2->setSymptoms("Fever");
 
-	patient P3;
-	P3.setName("Shashwat", "Shukla");
-	P3.setID("3");
-	P3.setSymptoms("Fracture");
-	P2.setSymptoms("Cough");
+	patient *P3 = new patient;
+	P3->setName("Shashwat", "Shukla");
+	P3->setID("2");
+	P3->setSymptoms("Fracture");
+	P3->setSymptoms("Cough");
 
-	patient P4;
-	P4.setName("Parth", "Jatakia");
-	P4.setID("4");
-	P4.setSymptoms("Fever");
+	patient *P4 = new patient;
+	P4->setName("Parth", "Jatakia");
+	P4->setID("3");
+	P4->setSymptoms("Fever");
 
-	insert_DB(&P1);
-	insert_DB(&P2);
-	insert_DB(&P3);
-	insert_DB(&P4);
+	insert_DB(P1);
+	insert_DB(P2);
+	insert_DB(P3);
+	insert_DB(P4);
 
-	assignDoc(&P1);
+	assignDoc(P1);
 	generate_display();
 	getchar();
-	assignDoc(&P2);
+	assignDoc(P2);
 	generate_display();
 	getchar();
-	assignDoc(&P3);
+	assignDoc(P3);
 	generate_display();
 	getchar();
-	assignDoc(&P4);
+	assignDoc(P4);
 	getchar();
 	generate_display();
-
-	// AllDoctors[0].diagnose();
-	// P1.getPrescriptionLenght();
-	// P2.getPrescriptionLenght();
-	// P3.getPrescriptionLenght();
-	// P4.getPrescriptionLenght();
-	// getchar();
-
-	// AllDoctors[1].diagnose();
-	// P1.getPrescriptionLenght();
-	// P2.getPrescriptionLenght();
-	// P3.getPrescriptionLenght();
-	// P4.getPrescriptionLenght();
-	// getchar();
-
-	// AllDoctors[2].diagnose();
-	// P1.getPrescriptionLenght();
-	// P2.getPrescriptionLenght();
-	// P3.getPrescriptionLenght();
-	// P4.getPrescriptionLenght();
-	// getchar();
-
-	// AllDoctors[3].diagnose();
-	// P1.getPrescriptionLenght();
-	// P2.getPrescriptionLenght();
-	// P3.getPrescriptionLenght();
-	// P4.getPrescriptionLenght();
-	// getchar();
-
-	// AllDoctors[4].diagnose();
-	// P1.getPrescriptionLenght();
-	// P2.getPrescriptionLenght();
-	// P3.getPrescriptionLenght();
-	// P4.getPrescriptionLenght();
-	// getchar();
 
 }

@@ -189,6 +189,7 @@ void patient::addPrescription(diagnosis prescript) {
 
 void doctor::diagnose()
 {
+	if (doctor::patientLine.size() == 0) return;
 	patient * p = doctor::patientLine.front();
 	for (int i = 0; i < doctor::whatICanCure.size(); i++)
 	{
@@ -199,6 +200,7 @@ void doctor::diagnose()
 				diagnosis diag;
 				diag.disease = toSympString(p->symptoms[j]);
 				diag.treatment = "Tablets given for 5 days";
+				output_logs.push("Patient " + p->fname + " examined.\n");
 				p -> symptoms.erase(p -> symptoms.begin() + j);
 				p -> addPrescription(diag);
 
@@ -209,9 +211,9 @@ void doctor::diagnose()
 	doctor::patientLine.pop();
 	if (p->symptoms.size() != 0)
 	{
-		cout << "Patient is not yet cured send to another Doctor" << endl;
+		output_logs.push("Patient " + p->fname + " is not yet cured send to another doctor.\n");
 		assignDoc(p);
-	}
+	} else output_logs.push("Patient " + p->fname + " discharged.\n");
 }
 
 int doctor::areUmyDoc(patient * p)
@@ -275,7 +277,6 @@ void Emergency (patient * p)
 	AllDoctors[i].getName( name);
 	p -> getName(fname, lname);
 	output_logs.push("Emergency Patient " + fname + " added to the front of waiting line for Dr. " + name + ".\n");
-	
 }
 
 int doctor::get_queue_length() {

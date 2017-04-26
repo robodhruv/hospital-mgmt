@@ -122,5 +122,5 @@ const string magenta("\033[0;35m");
 const string reset("\033[0m");
 const string bold("\033[1m");
 
-long int clk = 5;
+long int clk = 0;
 long int counter = 0;
