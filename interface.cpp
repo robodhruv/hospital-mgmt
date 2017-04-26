@@ -32,9 +32,9 @@ loop:
 		// case 4:
 		// 	examine_queue();
 		// 	break;
-		// case 5:
-		// 	emergency();
-		// 	break;
+		case '5':
+		 	emergency();
+		 	break;
 		case '0':
 			break;
 		default:
@@ -74,6 +74,20 @@ loop:
 		cout << "Invalid Input!" << endl;
 		goto loop;
 	}
+}
+
+void emergency()
+{
+	patient *PEmer = new patient;
+	PEmer->setName("Emerg", "Pat");
+	PEmer->setID("-1");
+	cout << "Enter Patient's Symptoms: ";
+	string symptoms;
+	cin >> symptoms;
+	PEmer->setSymptoms(symptoms);
+	generate_display();
+
+	Emergency (PEmer);
 }
 
 void search_by_ID() {
