@@ -200,7 +200,7 @@ void doctor::diagnose()
 				diagnosis diag;
 				diag.disease = toSympString(p->symptoms[j]);
 				diag.treatment = "Tablets given for 5 days";
-				output_logs.push("Patient " + p->fname + " examined.\n");
+				output_logs.push("Patient " + p->fname + " examined for " + toSympString(p->symptoms[j]) + ".\n");
 				p -> symptoms.erase(p -> symptoms.begin() + j);
 				p -> addPrescription(diag);
 
