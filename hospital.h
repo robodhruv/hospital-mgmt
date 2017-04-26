@@ -19,8 +19,9 @@ Function definitions will be enumerated in separate files.
 #include <numeric>
 #include <limits>
 #include "time.h"
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <stdio.h>
+#include <algorithm>
 
 #define TABLE_SIZE 100
 
@@ -31,8 +32,8 @@ class doctor;
 class diagnosis;
 class patientrecord;
 
-//Patients arrive and queue up at the reception.
-queue<patient> Reception;
+// Patient Database stored here
+HashMap_2D hospiDB;
 
 //Each patient has relevant attributes
 class patient {
@@ -80,12 +81,12 @@ int toSympInt (string s)
 
 
 // Cough(0), Fever(1), Diarrhea(2) -> Physician A, Physician B
-    // Fracture(3), MuscleInjury (4) -> Orthopedic
-    // HeartPain (5) -> Cardiologist
-    // Alzheimer (6) -> Neurologist
+// Fracture(3), MuscleInjury (4) -> Orthopedic
+// HeartPain (5) -> Cardiologist
+// Alzheimer (6) -> Neurologist
 
 vector <doctor> AllDoctors; // a vector containing all the doctors in the hospital.
-
+queue <string> output_logs;
 //Since the number of doctors is very less, hashmap for doctors is not required.
 //Each doctor is identified by his name, id(remove if not needed) and specialisation
 class doctor {
@@ -139,3 +140,5 @@ const string cyan("\033[0;36m");
 const string magenta("\033[0;35m");
 const string reset("\033[0m");
 const string bold("\033[1m");
+
+long int clk = 5;

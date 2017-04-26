@@ -51,6 +51,7 @@ void patient::setSymptoms (string symp)
 void doctor::setName(string name)
 {
 	doctor::name = name;
+	doctor::ID = clk;
 }
 
 void doctor::getName(string &name)
@@ -120,26 +121,27 @@ void doctor::addToLine(patient * p)
 	doctor::patientLine.push(p);
 	string fname, lname;
 	p -> getName(fname, lname);
-	cout << "Patient " <<  fname << " added to waiting line for Dr. " << doctor::name << endl;
+	output_logs.push("Patient " + fname + " added to waiting line for Dr. " + doctor::name + ".\n");
+	// cout << "Patient " <<  fname << " added to waiting line for Dr. " << doctor::name << endl;
 }
 
 void doctor::setWhatICanCure ()
 {
-	if (doctor::fieldID == 1) { 
-		doctor::whatICanCure.push_back(0); 
+	if (doctor::fieldID == 1) {
+		doctor::whatICanCure.push_back(0);
 		doctor::whatICanCure.push_back(1);
 		doctor::whatICanCure.push_back(2);
 	}
 
-	if (doctor::fieldID == 2) { 
-		doctor::whatICanCure.push_back(3); 
+	if (doctor::fieldID == 2) {
+		doctor::whatICanCure.push_back(3);
 		doctor::whatICanCure.push_back(4);
 	}
-	if (doctor::fieldID == 3) { 
-		doctor::whatICanCure.push_back(5); 
+	if (doctor::fieldID == 3) {
+		doctor::whatICanCure.push_back(5);
 	}
-	if (doctor::fieldID == 4) { 
-		doctor::whatICanCure.push_back(6); 
+	if (doctor::fieldID == 4) {
+		doctor::whatICanCure.push_back(6);
 	}
 }
 
@@ -149,35 +151,35 @@ void patient::addPrescription(diagnosis prescript) {
 
 void doctor::diagnose(patient * p)
 {
-	for (int i=0; i<doctor::whatICanCure.size();i++)
+	for (int i = 0; i < doctor::whatICanCure.size(); i++)
 	{
 		for (int j = 0; j < p->symptoms.size(); j++)
 		{
-			if (i==j)
+			if (i == j)
 			{
 				diagnosis diag;
 				diag.disease = toSympString(p->symptoms[j]);
 				diag.treatment = "Tablets given for 5 days";
-				p -> symptoms.erase(p -> symptoms.begin()+j);
+				p -> symptoms.erase(p -> symptoms.begin() + j);
 				p -> addPrescription(diag);
 
 			}
 		}
 	}
 
-doctor::patientLine.pop();
-if (p->symptoms.size()!=0) 
-{
+	doctor::patientLine.pop();
+	if (p->symptoms.size() != 0)
+	{
 		cout << "Patient is not yet cured send to another Doctor" << endl;
 		assignDoc(p);
 	}
 }
 
 int doctor::areUmyDoc(patient * p)
-{	
-	for (int i=0; i < doctor::whatICanCure.size(); i++)
+{
+	for (int i = 0; i < doctor::whatICanCure.size(); i++)
 	{
-		for (int j=0; j < p -> symptoms.size(); j++)
+		for (int j = 0; j < p -> symptoms.size(); j++)
 		{
 			if (doctor::whatICanCure[i] == p -> symptoms[j])
 			{
@@ -187,7 +189,7 @@ int doctor::areUmyDoc(patient * p)
 	}
 
 	return numeric_limits<int>::max();
-	
+
 }
 
 void assignDoc(patient * p)
