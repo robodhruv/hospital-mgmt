@@ -36,9 +36,17 @@ void patient::setID(string id)
 }
 
 void patient::setName(string fname, string lname)
-{
-	patient::fname = fname;
-	patient::lname = lname;
+{	
+	string lower = "";
+	locale loc;
+	for (auto elem : fname)	lower.push_back(tolower(elem, loc));
+	patient::fname = lower;
+	
+	lower = "";
+	for (auto elem : lname)	lower.push_back(tolower(elem, loc));
+	patient::lname = lower;
+
+	patient::ID = clk;
 }
 
 void patient::setSymptoms (string symp)
@@ -51,7 +59,6 @@ void patient::setSymptoms (string symp)
 void doctor::setName(string name)
 {
 	doctor::name = name;
-	doctor::ID = clk;
 }
 
 void doctor::getName(string &name)

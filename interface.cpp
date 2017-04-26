@@ -1,5 +1,8 @@
 #include "display.h"
 
+HashMap_2D hospiDB;
+trie hospiDB_tries;
+
 int main() {
 	initialiseDoctors();
 	initialisePatients();
@@ -8,38 +11,45 @@ int main() {
 }
 
 void begin_operation() {
-	int action = -1;
+	char action = -1;
 
 	while (action != 0) {
 		generate_actions();
-loop:
+	loop:
+		cout << "Choose an action to perform. ";
 		action = getchar();
 		switch (action) {
-		case 1:
+		case '1':
 			add_patient();
 			break;
 		case 2:
 			search_patient();
 			break;
-		case 3:
-			edit_patient();
-			break;
-		case 4:
-			examine_queue();
-			break;
-		case 5:
-			emergency();
-			break;
+		// case 3:
+		// 	edit_patient();
+		// 	break;
+		// case 4:
+		// 	examine_queue();
+		// 	break;
+		// case 5:
+		// 	emergency();
+		// 	break;
 		case 0:
 			break;
 		default:
+			cout << action;
 			cout << "Invalid input \n";
 			goto loop;
 		}
 	}
 }
 
+void search_patient(){
+	return;
+}
+
 void add_patient() {
+	generate_actions();
 	string fname, lname, symptoms;
 	cout << "Enter Patient's First Name: ";
 	cin >> fname;
@@ -47,16 +57,20 @@ void add_patient() {
 	cout << "Enter Patient's Last Name: ";
 	cin >> lname;
 	generate_actions();
-	cout << "Enter Patient's Symptoms: ";
-	cin >> symptoms;
-	generate_actions();
-
 	patient P;
 	P.setName(fname, lname);
+	cout << "Enter Patient's Symptoms: ";
+	cin >> symptoms;
 	P.setSymptoms(symptoms);
 
+	generate_actions();
+
+	assignDoc(&P);
 	hospiDB.insert_patient(&P);
+	hospiDB_tries.insertPatient(&P);
+	getchar();
 }
+
 void initialisePatients() {
 	patient P1;
 	P1.setName("Dhruv", "Shah");
@@ -78,6 +92,14 @@ void initialisePatients() {
 	P4.setID("4");
 	P4.setSymptoms("Fever");
 
+	hospiDB_tries.insertPatient(&P1);
+	hospiDB.insert_patient(&P1);
+	hospiDB_tries.insertPatient(&P2);
+	hospiDB.insert_patient(&P2);	
+	hospiDB_tries.insertPatient(&P3);
+	hospiDB.insert_patient(&P3);	
+	hospiDB_tries.insertPatient(&P4);
+	hospiDB.insert_patient(&P4);
 
 	assignDoc(&P1);
 	generate_display();

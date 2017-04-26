@@ -22,6 +22,7 @@ Function definitions will be enumerated in separate files.
 #include <stdlib.h>
 #include <stdio.h>
 #include <algorithm>
+#include <locale>
 
 #define TABLE_SIZE 100
 
@@ -32,8 +33,6 @@ class doctor;
 class diagnosis;
 class patientrecord;
 
-// Patient Database stored here
-HashMap_2D hospiDB;
 
 //Each patient has relevant attributes
 class patient {

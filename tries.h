@@ -8,55 +8,13 @@ patients whose full names are not known.
 | IIT Bombay                                                        |
  -------------------------------------------------------------------
 */
-//#include "hospital.h"
-#include <iostream>
-#include <vector>
-#include <stack>
-#include <queue>
-#include <string>
-#include <numeric>
-#include <limits>
-#include <stdlib.h>
+#include "2Dhashmap.h"
 
 //The name inputted should contain no spaces and if there are they will be removed by the code
 
 #define letterSet 26
 #define origin 'a'
 #define MAX 25
-
-using namespace std;
-
-class patient {
-    string fname, lname, ID; //Identity of the patient
-public:
-    void getName(string &fname, string &lname);
-    void getID(string &id);
-    void setName(string fname, string lname);
-    void setID(string id);
-    //Add accessor and mutator functions
-};
-
-void patient::getName(string &fname, string &lname)
-{
-    fname = patient::fname;
-    lname = patient::lname;
-}
-
-void patient::getID(string &id)
-{
-    id = patient::ID;
-}
-
-void patient::setName(string fname, string lname)
-{
-    patient::fname = fname;
-    patient::lname = lname;
-}
-
-void patient::setID(string id)
-{
-    patient::ID = id;
-}
 
 struct node
 {
@@ -190,33 +148,3 @@ public:
     }
 
 };
-
-int main()
-{
-    patient person1;
-    person1.setName("parth", "jatakia");
-    person1.setID("1");
-    patient person2;
-    person2.setName("parth", "jataki");
-    person2.setID("2");
-    cout << "1" << endl;
-    trie mytrie;
-    cout << "2" << endl;
-    mytrie.insertPatient(&person1);
-
-    cout<<"2"<<endl;
-    vector<patient*> returnSearch(mytrie.searchPatient("parth"));
-
-
-    cout<<"returnSearch Size = "<<returnSearch.size()<<endl;
-
-    for (int i = 0; i < returnSearch.size(); ++i)
-    {
-        cout << i << endl;
-        string lname, fname;
-        returnSearch[i]->getName(fname, lname);
-        cout << fname << " " << lname << endl;
-
-    }
-    return 0;
-}

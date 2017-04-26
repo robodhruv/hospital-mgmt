@@ -1,4 +1,4 @@
-#include "2Dhashmap.h"
+#include "tries.h"
 
 void generate_line(doctor doc);
 string get_color(int len);
@@ -41,7 +41,8 @@ void generate_actions() {
 	cout << bold << "2. " << reset << " Search for a patient." << endl;
 	cout << bold << "3. " << reset << " Edit patient details." << endl;
 	cout << bold << "4. " << reset << " Examine a queue." << endl;
-	cout << reset << bold << "5. " << red << " Emergency!" << endl;
+	cout << reset << bold << "5. " << red << " Emergency!" << reset << endl;
+	cout << "\n\n";
 }
 
 void generate_line(doctor doc) {
