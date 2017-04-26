@@ -15,6 +15,7 @@ void begin_operation() {
 
 	while (action != 0) {
 		generate_actions();
+		clk++;
 loop:
 		cout << "Choose an action to perform. ";
 		action = getchar();
@@ -40,6 +41,12 @@ loop:
 			cout << action;
 			cout << "Invalid input \n";
 			goto loop;
+		}
+
+		if (clk % 3 == 0) {
+			for (int i = 0; i < AllDoctors.size(); i++) {
+				AllDoctors[i].diagnose();
+			}
 		}
 	}
 }
@@ -75,7 +82,6 @@ void search_by_ID() {
 ID_enter:
 	cout << "Enter Patient ID: ";
 	cin >> ID;
-	cout << DB_compl.size();
 	if (ID >= DB_compl.size()) {
 		cout << "Invalid ID!";
 		goto ID_enter;
