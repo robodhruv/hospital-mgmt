@@ -56,7 +56,7 @@ string get_color_log(string log){
 
 void generate_actions() {
 	generate_display();
-	cout << bold << "1. " << reset << " Add a new patient." << endl;
+	cout << bold << "1. " << reset << " Add a patient." << endl;
 	cout << bold << "2. " << reset << " Search for a patient." << endl;
 	cout << bold << "3. " << reset << " Edit patient details." << endl;
 	cout << bold << "4. " << reset << " Examine a queue." << endl;
