@@ -233,7 +233,7 @@ int doctor::areUmyDoc(patient * p)
 
 }
 
-void assignDoc(patient * p)
+int findMyDoc(patient * p)
 {
 	int least_waiting = numeric_limits<int>::max(); // set to max initially
 	doctor myDoctor;
@@ -247,8 +247,36 @@ void assignDoc(patient * p)
 			min_i = i;
 		}
 	}
-	myDoctor.addToLine(p);
-	AllDoctors[min_i] = myDoctor;
+	return min_i;
+}
+
+void assignDoc(patient * p)
+{
+	int min_i = findMyDoc(p);
+	AllDoctors[min_i].addToLine(p);
+}
+
+
+
+void Emergency (patient * p)
+{
+	int i = findMyDoc(p);
+
+	queue<patient*> newPatientLine;
+	newPatientLine.push(p);
+
+	while (! AllDoctors[i].patientLine.empty())
+	{
+	    patient * q = AllDoctors[i].patientLine.front();
+	    newPatientLine.push(q);
+	    AllDoctors[i].patientLine.pop();
+	} 
+
+	AllDoctors[i].patientLine = newPatientLine;
+	string fname, lname,name;
+	AllDoctors[i].getName( name);
+	p -> getName(fname, lname);
+	output_logs.push("Emergency Patient " + fname + " added to the front of waiting line for Dr. " + name + ".\n");
 }
 
 int doctor::get_queue_length() {

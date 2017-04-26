@@ -75,11 +75,10 @@ class doctor {
     string name;
     string ID;
     int fieldID; // fieldID is an int given to each field of specialization eg. 1 for general physician, 2 for Orthopaedic...
-    queue<patient*> patientLine;// queue of the patient waiting to be diagnosed under the doctor.
     //..$%$%$ I am doubtful if this is how a queue of pointers to patient is implemeneted please check.$%$%$
 public:
     //Add accessor and mutator functions
-
+    queue<patient*> patientLine;// queue of the patient waiting to be diagnosed under the doctor.
     void setName(string name);
     void getName(string &name);
     void setID(string id);
