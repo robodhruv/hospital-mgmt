@@ -131,17 +131,17 @@ void add_patient() {
 	string fname, lname, symptoms;
 	cout << "Enter Patient's First Name: ";
 	cin >> fname;
-	generate_actions();
+	generate_display();
 	cout << "Enter Patient's Last Name: ";
 	cin >> lname;
-	generate_actions();
+	generate_display();
 	patient *P = new patient;
 	P->setName(fname, lname);
 	cout << "Enter Patient's Symptoms: ";
 	cin >> symptoms;
 	P->setSymptoms(symptoms);
 
-	generate_actions();
+	generate_display();
 
 	assignDoc(P);
 	insert_DB(P);
