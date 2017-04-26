@@ -9,7 +9,31 @@ in the header file "hospital.h"
 */
 
 #include "hospital.h"
+//Public Functions
+string toSympString(int i)
+{
+    if ( i == 0) return "Cough";
+    else if ( i == 1) return "Fever";
+    else if ( i == 2) return "Diarrhea";
+    else if ( i == 3) return "Fracture";
+    else if ( i == 4) return "MuscleInjury";
+    else if ( i == 5) return "HeartPain";
+    else if ( i == 6) return "Alzheimer";
+}
 
+int toSympInt (string s)
+{
+    if ( s == "Cough") return 0;
+    else if (s == "Fever") return 1;
+    else if (s == "Diarrhea") return 2;
+    else if (s == "Fracture") return 3;
+    else if (s == "MuscleInjury") return 4;
+    else if (s == "HeartPain") return 5;
+    else if (s == "Alzheimer") return 6;
+
+}
+
+//Doctor Functions
 void assignDoc(patient * p);
 
 //.......Patient Functions..........//
@@ -162,7 +186,7 @@ void doctor::diagnose(patient * p)
 	{
 		for (int j = 0; j < p->symptoms.size(); j++)
 		{
-			if (i == j)
+			if (whatICanCure[i]==p->symptoms[j])
 			{
 				diagnosis diag;
 				diag.disease = toSympString(p->symptoms[j]);
