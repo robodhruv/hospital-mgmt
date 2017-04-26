@@ -3,10 +3,15 @@
 void generate_line(doctor doc);
 string get_color(int len);
 void initialisePatients();
+void generate_display();
 
 int main() {
 	initialiseDoctors();
 	initialisePatients();
+	generate_display();	
+}
+
+void generate_display() {
 	int num_docs = AllDoctors.size();
 	system("clear");
 	
@@ -23,10 +28,10 @@ int main() {
 
 void generate_line(doctor doc) {
 	string color = get_color(doc.get_queue_length());
-	int max_length = 7;
+	int max_length = 10;
 	cout <<"[ " << color;
 	for (int i = 0; i < max_length; i++) {
-		if (i < doc.get_queue_length())	cout << " + ";
+		if (i < doc.get_queue_length())	cout << " \u263A ";
 		else cout << "   ";
 	}
 	cout << reset << " ]" << endl;
@@ -59,25 +64,54 @@ void initialisePatients() {
 	P4.setID("007");
 	P4.setSymptoms("HeartPain");
 
-	assignDoc(&P1);
-	assignDoc(&P1);
-	assignDoc(&P1);
 
+	if (1) {
+		assignDoc(&P1);
+		generate_display();	
+		getchar();	
+		assignDoc(&P1);
+		generate_display();	
+		getchar();
+		assignDoc(&P1);
+		generate_display();	
+		getchar();
 
-	assignDoc(&P2);
-	assignDoc(&P2);
-	assignDoc(&P2);
-	assignDoc(&P2);
-	assignDoc(&P2);
-	assignDoc(&P2);
-	assignDoc(&P2);
-	assignDoc(&P2);
-	assignDoc(&P2);
-	assignDoc(&P2);
+		assignDoc(&P2);
+		generate_display();	
+		getchar();
+		assignDoc(&P2);
+		generate_display();	
+		getchar();
+		assignDoc(&P2);
+		generate_display();	
+		getchar();
+		assignDoc(&P2);
+		generate_display();	
+		getchar();
+		assignDoc(&P2);
+		generate_display();	
+		getchar();
+		assignDoc(&P2);
+		generate_display();	
+		getchar();
+		assignDoc(&P2);
+		generate_display();	
+		getchar();
+		assignDoc(&P2);
+		generate_display();	
+		getchar();
+		assignDoc(&P2);
+		generate_display();	
 
-	assignDoc(&P3);
+		getchar();
+		assignDoc(&P3);
+		generate_display();	
 
-	assignDoc(&P4);
-	assignDoc(&P4);
+		getchar();
+		assignDoc(&P4);
+		generate_display();	
+		getchar();
+		assignDoc(&P4);
+	}
 
 }

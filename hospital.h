@@ -20,6 +20,7 @@ Function definitions will be enumerated in separate files.
 #include <limits>
 #include "time.h"
 #include <stdlib.h> 
+#include <stdio.h>
 
 #define TABLE_SIZE 100
 
