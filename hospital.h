@@ -34,6 +34,8 @@ class diagnosis;
 class patientrecord;
 
 
+// Patient Database stored here
+
 //Each patient has relevant attributes
 class patient {
     string fname, lname, ID; //Identity of the patient
@@ -47,31 +49,10 @@ public:
     void setSymptoms(string symptoms);
     void addPrescription(diagnosis prescript);
     void setID(string id);
+    void getPrescriptionLenght();
     //Add accessor and mutator function
 };
 
-string toSympString(int i)
-{
-    if ( i == 0) return "Cough";
-    else if ( i == 1) return "Fever";
-    else if ( i == 2) return "Diarrhea";
-    else if ( i == 3) return "Fracture";
-    else if ( i == 4) return "MuscleInjury";
-    else if ( i == 5) return "HeartPain";
-    else if ( i == 6) return "Alzheimer";
-}
-
-int toSympInt (string s)
-{
-    if ( s == "Cough") return 0;
-    else if (s == "Fever") return 1;
-    else if (s == "Diarrhea") return 2;
-    else if (s == "Fracture") return 3;
-    else if (s == "MuscleInjury") return 4;
-    else if (s == "HeartPain") return 5;
-    else if (s == "Alzheimer") return 6;
-
-}
 
 //At the reception, the patients are assigned to a doctor based on their symptoms.
 //As of now, they are assigned to one doctor, despite having multiple symptoms. This doctor then
@@ -104,7 +85,7 @@ public:
     void setFieldID(int id);
     void getFieldID(int &id);
     void addToLine(patient * p); //adds patient p to the queue of the doctor.
-    void diagnose(patient *p); //Diagnose patient first in the queue and add diagnosis in patient's prescription vector.
+    void diagnose(); //Diagnose patient first in the queue and add diagnosis in patient's prescription vector.
     int areUmyDoc(patient *p);
     vector<int> whatICanCure;
     void setWhatICanCure ();
