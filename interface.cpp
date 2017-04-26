@@ -4,7 +4,7 @@ int main() {
 	initialiseDoctors();
 	initialisePatients();
 	generate_actions();
-	begin_operation();
+	//begin_operation();
 }
 
 void begin_operation() {
@@ -55,23 +55,26 @@ void add_patient() {
 	P.setName(fname, lname);
 	P.setSymptoms(symptoms);
 
-	hospiDB.insert_patient(&P);
+	//hospiDB.insert_patient(&P);
 }
 void initialisePatients() {
 	patient P1;
 	P1.setName("Dhruv", "Shah");
 	P1.setID("1");
 	P1.setSymptoms("Alzheimer");
+	P1.setSymptoms("Fever");
 
 	patient P2;
 	P2.setName("Pranav", "Kulkarni");
 	P2.setID("2");
 	P2.setSymptoms("Cough");
+	P2.setSymptoms("Fever");
 
 	patient P3;
 	P3.setName("Shashwat", "Shukla");
 	P3.setID("3");
 	P3.setSymptoms("Fracture");
+	P2.setSymptoms("Cough");
 
 	patient P4;
 	P4.setName("Parth", "Jatakia");
@@ -89,4 +92,36 @@ void initialisePatients() {
 	generate_display();
 	getchar();
 	assignDoc(&P4);
+	getchar();
+	AllDoctors[0].diagnose();
+	P1.getPrescriptionLenght();
+	P2.getPrescriptionLenght();
+	P3.getPrescriptionLenght();
+	P4.getPrescriptionLenght();
+	getchar();
+	AllDoctors[1].diagnose();
+	P1.getPrescriptionLenght();
+	P2.getPrescriptionLenght();
+	P3.getPrescriptionLenght();
+	P4.getPrescriptionLenght();
+	getchar();
+	AllDoctors[2].diagnose();
+	P1.getPrescriptionLenght();
+	P2.getPrescriptionLenght();
+	P3.getPrescriptionLenght();
+	P4.getPrescriptionLenght();
+	getchar();
+	AllDoctors[3].diagnose();
+	P1.getPrescriptionLenght();
+	P2.getPrescriptionLenght();
+	P3.getPrescriptionLenght();
+	P4.getPrescriptionLenght();
+	getchar();
+	AllDoctors[4].diagnose();
+	P1.getPrescriptionLenght();
+	P2.getPrescriptionLenght();
+	P3.getPrescriptionLenght();
+	P4.getPrescriptionLenght();
+	getchar();
+
 }

@@ -70,6 +70,12 @@ void patient::setSymptoms (string symp)
 	patient::symptoms.push_back(toSympInt(symp));
 }
 
+void patient::getPrescriptionLenght()
+{
+	cout<< patient::prescription.size()<<endl;
+}
+
+
 //.......Doctor Functions..........//
 
 void doctor::setName(string name)
@@ -173,8 +179,9 @@ void patient::addPrescription(diagnosis prescript) {
 	patient::prescription.push_back(prescript);
 }
 
-void doctor::diagnose(patient * p)
+void doctor::diagnose()
 {
+	patient * p = doctor::patientLine.front();
 	for (int i = 0; i < doctor::whatICanCure.size(); i++)
 	{
 		for (int j = 0; j < p->symptoms.size(); j++)

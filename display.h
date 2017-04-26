@@ -33,6 +33,8 @@ void generate_display() {
 
 	cout << "\n\n\n\n\n\n";
 
+
+
 }
 
 void generate_actions() {
