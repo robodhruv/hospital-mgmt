@@ -18,7 +18,7 @@ void display_details(patient * pat);
 
 void generate_display() {
 	int num_docs = AllDoctors.size();
-	system("clear");
+	system("cls");
 
 	cout << cyan << "Welcome to the Hospital Management System!\n\n\n" << reset;
 

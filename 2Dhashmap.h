@@ -98,9 +98,9 @@ public:
 
 		for (int i = 0; i < TABLE_SIZE; i++) {
 			HashNode * entry = hash_table[index_f][i];
-			while (entry != NULL) {
+			while (entry != NULL) { 
 				string Fname, Lname, ID;
-				hash_table[index_f][i] -> getName(Fname, Lname);
+				hash_table[index_f][i] -> getName(Fname, Lname); //Check for fname equality
 				hash_table[index_f][i] -> getID(ID);
 				patients.push_back(hash_table[index_f][i] -> getPatient());
 				// if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;

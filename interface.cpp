@@ -34,7 +34,7 @@ void begin_operation() {
 		// case 5:
 		// 	emergency();
 		// 	break;
-		case 0:
+		case '0':
 			break;
 		default:
 			cout << action;
@@ -87,6 +87,30 @@ void search_by_ID() {
 
 	getchar();
 }
+/*
+void search_by_name(){ //Complete it!
+
+	generate_display();
+	int choice;
+	string fname;
+	vector<string> IDs;
+	vector<patient *> patients;
+	cout << "Search by:" << endl;
+	cout << bold << "1. " << reset << " First name" << endl;
+	cout << bold << "2. " << reset << " Last Name" << endl;
+	cout << bold << "3. " << reset << " Substring" << endl;
+	cin >> choice;
+	switch(choice){
+		case 1: //Complete it!
+			cout << "Enter first name of patient: " << endl;
+			cin.getline(fname);
+			hospiDB.search_patient_fname(fname,IDs,patients);
+			break;
+		case 2:
+			break;
+	}
+
+} */
 
 void display_details(patient * pat){
 	string fname, lname;
