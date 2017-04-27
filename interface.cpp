@@ -117,12 +117,18 @@ void emergency()
 	patient *PEmer = new patient;
 	PEmer->setName("Emerg", "Pat");
 	PEmer->setID("-1");
+
+	correctEntry:
+	generate_display();
 	cout << "Enter Patient's Symptoms: ";
 	string symptoms;
 	cin >> symptoms;
+	int sizeOld = PEmer->symptomsSize();
 	PEmer->setSymptoms(symptoms);
-	generate_display();
+	int sizeNew = PEmer->symptomsSize();
+	if(sizeOld==sizeNew) goto correctEntry;
 
+	generate_display();
 	Emergency (PEmer);
 }
 

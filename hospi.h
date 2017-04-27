@@ -30,6 +30,7 @@ int toSympInt (string s)
     else if (s == "MuscleInjury") return 4;
     else if (s == "HeartPain") return 5;
     else if (s == "Alzheimer") return 6;
+    else return -1;
 
 }
 
@@ -78,7 +79,15 @@ void patient::setName(string fname, string lname)
 
 void patient::setSymptoms (string symp)
 {
-	patient::symptoms.push_back(toSympInt(symp));
+	int SympInt = toSympInt(symp);
+	if(SympInt != -1)
+	{patient::symptoms.push_back(SympInt);}
+	else
+	{
+		cout<<"Wrong Symptom. Try Again!"<<endl;
+		getchar();
+		getchar();
+	}
 }
 
 void patient::getPrescriptionLenght()
