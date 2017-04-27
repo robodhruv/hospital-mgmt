@@ -14,32 +14,32 @@ class HashNode {
 // A node in the 2D hash table. Note that the input does not
 // require an extra key as the name is a part of the value.
 public:
-    HashNode (patient * pat) {
-            person = pat;
-            next = NULL;
-    }
-    void getName(string &fname, string &lname) {
-        person -> getName(fname, lname);
-    }
-    patient * getPatient() {
-        return person;
-    }
-    void getID(string &ID) {
-        person -> getID(ID);
-    }
+	HashNode (patient * pat) {
+			person = pat;
+			next = NULL;
+	}
+	void getName(string &fname, string &lname) {
+		person -> getName(fname, lname);
+	}
+	patient * getPatient() {
+		return person;
+	}
+	void getID(string &ID) {
+		person -> getID(ID);
+	}
 
-    void setName(string fname, string lname) {
-        person -> setName(fname, lname); 
-    }
-    void setPatient(patient * pat) {
-        person = pat;
-    }
-    HashNode * getNext() {
-        return HashNode::next;
-    }
-    void setNext (HashNode * next) {
-        next = next;
-    }
+	void setName(string fname, string lname) {
+		person -> setName(fname, lname); 
+	}
+	void setPatient(patient * pat) {
+		person = pat;
+	}
+	HashNode * getNext() {
+		return HashNode::next;
+	}
+	void setNext (HashNode * next) {
+		next = next;
+	}
 
 private:
 	patient * person;
@@ -58,8 +58,8 @@ class HashMap_2D {
 public:
 	HashMap_2D() {
 		vector<vector<HashNode *> > table(TABLE_SIZE, vector<HashNode *>
-		                                       (TABLE_SIZE, NULL));
-        hash_table = table;
+											   (TABLE_SIZE, NULL));
+		hash_table = table;
 	}
 	~HashMap_2D() {
 		// Do we need a destructor?
@@ -69,7 +69,7 @@ public:
 
 	void insert_patient (patient * pat) {
 
-        patient person = *pat;
+		patient person = *pat;
 		string fname, lname;
 		person.getName(fname, lname);
 		int index_f = hash_funct(fname);
@@ -102,9 +102,10 @@ public:
 				string Fname, Lname, ID;
 				hash_table[index_f][i] -> getName(Fname, Lname); //Check for fname equality
 				hash_table[index_f][i] -> getID(ID);
-				patients.push_back(hash_table[index_f][i] -> getPatient());
-				// if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;
-				IDs.push_back(ID);
+				if (fname == Fname) {
+					patients.push_back(hash_table[index_f][i] -> getPatient());
+					IDs.push_back(ID);
+				}
 				entry = entry -> getNext();
 			}
 		}
@@ -119,9 +120,10 @@ public:
 				string Fname, Lname, ID;
 				hash_table[i][index_l] -> getName(Fname, Lname);
 				hash_table[i][index_l] -> getID(ID);
-				patients.push_back(hash_table[i][index_l] -> getPatient());
-				// if (Lname == lname) cout << Fname << " " << Lname << " - " << ID;
-				IDs.push_back(ID);
+				if (lname == Lname) {
+					patients.push_back(hash_table[i][index_l] -> getPatient());
+					IDs.push_back(ID);
+				}
 				entry = entry -> getNext();
 			}
 		}
@@ -133,13 +135,14 @@ public:
 
 		HashNode * entry = hash_table[index_f][index_l];
 
-        while (entry != NULL) {
+		while (entry != NULL) {
 			string Fname, Lname, ID;
 			hash_table[index_f][index_l] -> getName(Fname, Lname);
 			hash_table[index_f][index_l] -> getID(ID);
-			patients.push_back(hash_table[index_f][index_l] -> getPatient());
-			// if (Fname == fname) cout << Fname << " " << Lname << " - " << ID;
-			IDs.push_back(ID);
+			if (fname == Fname && lname == Lname){
+				patients.push_back(hash_table[index_f][index_l] -> getPatient());
+				IDs.push_back(ID);
+			}
 			entry = entry -> getNext();
 		}
 	}

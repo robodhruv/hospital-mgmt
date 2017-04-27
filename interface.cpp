@@ -171,6 +171,7 @@ void search_by_name() {
 			cout << bold << "Name: " << reset << patients[i] -> fname << " " << patients[i] -> lname << endl;
 		}
 		getchar();
+		getchar();
 		break;
 	case 2:
 		cout << "Enter first name of patient: ";
