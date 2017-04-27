@@ -243,8 +243,7 @@ void add_patient() {
 			}
 			else
 			{
-				cout<<"Patient already in the Queue"<<endl;
-				getchar();
+				output_logs.push("Patient already in the Queue");
 				getchar();
 			}
 		}
