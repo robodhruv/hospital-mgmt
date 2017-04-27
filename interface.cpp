@@ -279,9 +279,15 @@ void add_patient() {
 		generate_display();
 		patient *P = new patient;
 		P->setName(fname, lname);
+
+		correctEntryNew:
+		generate_display();
 		cout << "Enter Patient's Symptoms: ";
 		cin >> symptoms;
+		int sizeOld = P->symptomsSize();
 		P->setSymptoms(symptoms);
+		int sizeNew = P->symptomsSize();
+		if(sizeOld==sizeNew) goto correctEntryNew;
 
 		generate_display();
 
@@ -308,8 +314,16 @@ void add_patient() {
 		else {
 			generate_display();
 			if(DB_compl[ID]->symptomsSize()==0){
+
+				correctEntryOld:
+				generate_display();
 				cout << "Enter Patient's Symptoms: ";
 				cin >> symptoms;
+				int sizeOld = DB_compl[ID]->symptomsSize();
+				DB_compl[ID]->setSymptoms(symptoms);
+				int sizeNew = DB_compl[ID]->symptomsSize();
+				if(sizeOld==sizeNew) goto correctEntryOld;
+
 				DB_compl[ID]->setSymptoms(symptoms);
 				assignDoc(DB_compl[ID]);
 				insert_DB(DB_compl[ID]);
