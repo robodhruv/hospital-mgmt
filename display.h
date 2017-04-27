@@ -22,15 +22,15 @@ void generate_display() {
 	int num_docs = AllDoctors.size();
 	system("clear");
 
-	cout << cyan << "Welcome to the Hospital Management System!\n\n\n" << reset;
+	cout << cyan << bold << "Welcome to the Hospital Management System!\n\n\n" << reset;
 
 	for (int i = 0; i < num_docs; i++) {
 		string name;
 		AllDoctors[i].getName(name);
-		cout << blue << name << reset << ":\t\t";
+		cout << blue << bold << name << reset << ":\t\t";
 		generate_line(AllDoctors[i]);
 	}
-	cout << "\n\n\n\n\n\n";
+	cout << "\n\n\n\n";
 
 	for (int i = 0; i < output_logs.size(); i++) {
 		string color = get_color_log(output_logs.front());
@@ -74,7 +74,7 @@ void generate_line(doctor doc) {
 	int max_length = 7;
 	cout << "[ " << color;
 	for (int i = 0; i < max_length; i++) {
-		if (i < doc.get_queue_length())	cout << " + ";
+		if (i < doc.get_queue_length())	cout << bold << " + " << reset;
 		else cout << "   ";
 	}
 	cout << reset << " ]" << endl;
