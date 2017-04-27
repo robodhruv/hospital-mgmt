@@ -53,6 +53,7 @@ loop:
 }
 
 void search_patient() {
+	generate_display();
 	cout << "Search by:" << endl;
 	cout << bold << "1. " << reset << " ID" << endl;
 	cout << bold << "2. " << reset << " Name" << endl;
@@ -156,6 +157,7 @@ void search_by_name() {
 	cout << bold << "3. " << reset << " Last Name" << endl;
 	cout << bold << "4. " << reset << " Substring" << endl;
 	cin >> choice;
+	generate_display();
 	switch (choice) {
 	case 1: //Complete it!
 		cout << "Enter first name of patient: " << endl;
@@ -358,10 +360,27 @@ void initialisePatients() {
 	P4->setName("Parth", "Jatakia");
 	P4->setSymptoms("Fever");
 
+	patient *P5 = new patient;
+	P5->setName("Partha", "Bhattacharya");
+	P5->setSymptoms("Cough");
+
+	patient *P6 = new patient;
+	P6->setName("Donald", "Trump");
+	P6->setSymptoms("Alzheimer");
+	P6->setSymptoms("HeartPain");
+
+	patient *P7 = new patient;
+	P7->setName("Parnali", "Dubey");
+	P7->setSymptoms("Fracture");
+	P7->setSymptoms("Fever");
+
 	insert_DB(P1);
 	insert_DB(P2);
 	insert_DB(P3);
 	insert_DB(P4);
+	insert_DB(P5);
+	insert_DB(P6);
+	insert_DB(P7);
 
 	assignDoc(P1);
 	generate_display();
@@ -373,6 +392,15 @@ void initialisePatients() {
 	generate_display();
 	getchar();
 	assignDoc(P4);
+	getchar();
+	generate_display();
+	assignDoc(P5);
+	getchar();
+	generate_display();	
+	assignDoc(P6);
+	getchar();
+	generate_display();
+	assignDoc(P7);
 	getchar();
 	generate_display();
 
@@ -392,6 +420,21 @@ void initialisePatients() {
 	}
 
 	for(int i=0; i < P4->symptoms.size(); i++){
+			int j = P4->symptoms[i];
+			disease_list[j].push_back(P4);
+	}
+
+	for(int i=0; i < P5->symptoms.size(); i++){
+			int j = P4->symptoms[i];
+			disease_list[j].push_back(P4);
+	}
+
+	for(int i=0; i < P6->symptoms.size(); i++){
+			int j = P4->symptoms[i];
+			disease_list[j].push_back(P4);
+	}
+
+	for(int i=0; i < P7->symptoms.size(); i++){
 			int j = P4->symptoms[i];
 			disease_list[j].push_back(P4);
 	}
