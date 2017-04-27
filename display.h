@@ -14,6 +14,7 @@ void emergency();
 void insert_DB(patient * pat);
 void search_by_ID();
 void search_by_name();
+void search_by_disease();
 void display_details(patient * pat);
 string get_color_log(string log);
 
@@ -62,8 +63,8 @@ void generate_actions() {
 	generate_display();
 	cout << bold << "1. " << reset << " Add a patient." << endl;
 	cout << bold << "2. " << reset << " Search for a patient." << endl;
-	cout << bold << "3. " << reset << " Edit patient details." << endl;
-	cout << bold << "4. " << reset << " Examine a queue." << endl;
+	cout << bold << "3. " << reset << " Examine a queue." << endl;
+	cout << bold << "4. " << reset << " Sit IDLE." << endl;
 	cout << reset << bold << "5. " << red << " Emergency!" << reset << endl;
 	cout << "\n\n";
 }

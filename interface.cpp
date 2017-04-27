@@ -13,7 +13,7 @@ int main() {
 void begin_operation() {
 	char action = -1;
 
-	while (action != 0) {
+	while (action != '0') {
 		generate_actions();
 		clk++;
 loop:
@@ -26,14 +26,13 @@ loop:
 		case '2':
 			search_patient();
 			break;
-		// case 3:
-		// 	edit_patient();
-		// 	break;
-		case '4':
+		case '3':
 		 	examine_queue();
 		 	getchar();
-		 	getchar();
 		 	break;
+		case '4':
+			getchar();
+			break;
 		case '5':
 			emergency();
 			break;
@@ -145,7 +144,7 @@ ID_enter:
 	getchar();
 }
 
-void search_by_name() { //Complete it!
+void search_by_name() {
 	generate_display();
 	int choice;
 	string fname, lname, name;
@@ -258,7 +257,9 @@ void add_patient() {
 	cin >> choice;
 	switch (choice) {
 	case 1:// For NEW Patients
-	{	string fname, lname, symptoms;
+	{
+		string fname, lname, symptoms;
+		generate_display();
 		cout << "Enter Patient's First Name: ";
 		cin >> fname;
 		generate_display();
