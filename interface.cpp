@@ -28,7 +28,7 @@ loop:
 			break;
 		case '3':
 			examine_queue();
-		 	getchar();
+		 	getchar();	getchar();
 		 	break;
 		case '4':
 		 	getchar();
@@ -94,7 +94,7 @@ void examine_queue()
 			string docname;
 			AllDoctors[i].getName(docname);
 			int ql = AllDoctors[i].get_queue_length();
-			cout<< docname <<" : "<< ql <<" patients waiting : ";
+			cout<< bold << docname <<" : " << reset << ql <<" patients waiting\n";
 			queue<patient*> newPatientLine;
 
 			while (! AllDoctors[i].patientLine.empty())
@@ -103,7 +103,7 @@ void examine_queue()
 			    newPatientLine.push(q);
 			    string a,b;
 			    q -> getName(a,b);
-			    cout<< a<<" ";
+			    cout << " | " << a <<" | ";
 			    AllDoctors[i].patientLine.pop();
 			}
 			cout<< endl;
@@ -111,6 +111,7 @@ void examine_queue()
 			return;
 		}
 	}
+
 }
 
 void emergency()
