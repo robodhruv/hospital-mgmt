@@ -1,3 +1,14 @@
+/*
+Implementation of IITB Hospital Management System in C++.
+This file contains the main function and other interfacing for the
+final implementation of the system.
+ -------------------------------------------------------------------
+| Shashwat Shukla, Dhruv Ilesh Shah, Parth Jatakia, Pranav Kulkarni.|
+| CS213(M) - Data Structures and Algorithms, Spring 2017.           |
+| IIT Bombay                                                        |
+ -------------------------------------------------------------------
+*/
+
 #include "display.h"
 
 HashMap_2D hospiDB;

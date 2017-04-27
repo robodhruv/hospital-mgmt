@@ -1,3 +1,14 @@
+/*
+Implementation of IITB Hospital Management System in C++.
+This header file contains necessary functions for implementing a light
+terminal-based UI for the application.
+ -------------------------------------------------------------------
+| Shashwat Shukla, Dhruv Ilesh Shah, Parth Jatakia, Pranav Kulkarni.|
+| CS213(M) - Data Structures and Algorithms, Spring 2017.           |
+| IIT Bombay                                                        |
+ -------------------------------------------------------------------
+*/
+
 #include "tries.h"
 
 void generate_line(doctor doc);
@@ -74,7 +85,7 @@ void generate_line(doctor doc) {
 	int max_length = 7;
 	cout << "[ " << color;
 	for (int i = 0; i < max_length; i++) {
-		if (i < doc.get_queue_length())	cout << bold << " + " << reset;
+		if (i < doc.get_queue_length())	cout << bold << " + ";
 		else cout << "   ";
 	}
 	cout << reset << " ]" << endl;
