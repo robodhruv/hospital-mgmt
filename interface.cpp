@@ -27,12 +27,14 @@ loop:
 			search_patient();
 			break;
 		case '3':
-		 	examine_queue();
+			examine_queue();
 		 	getchar();
 		 	break;
 		case '4':
-			getchar();
-			break;
+		 	examine_queue();
+		 	getchar();
+		 	getchar();
+		 	break;
 		case '5':
 			emergency();
 			break;
@@ -90,7 +92,7 @@ void examine_queue()
 		AllDoctors[i].getID(ID);
 		if (id ==ID)
 		{
-			string docname; 
+			string docname;
 			AllDoctors[i].getName(docname);
 			int ql = AllDoctors[i].get_queue_length();
 			cout<< docname <<" : "<< ql <<" patients waiting : ";
@@ -104,7 +106,7 @@ void examine_queue()
 			    q -> getName(a,b);
 			    cout<< a<<" ";
 			    AllDoctors[i].patientLine.pop();
-			} 
+			}
 			cout<< endl;
 			AllDoctors[i].patientLine = newPatientLine;
 			return;
@@ -215,19 +217,22 @@ void search_by_disease() {
 
 	int c;
 	cout << "Enter disease to search with: " << endl;
+	cout << "0. Cough" << endl;
 	cout<< "1. Fever" << endl;
     cout<< "2. Diarrhea" << endl;
     cout<< "3. Fracture" << endl;
     cout<< "4. MuscleInjury" << endl;
     cout<< "5. HeartPain" << endl;
     cout<< "6. Alzheimer" << endl;
-    cin >> c;
+    cin >> c; getchar();
+
     for(int i=0; i<disease_list[c].size(); i++){
     	string fname, lname, id;
     	disease_list[c][i]->getName(fname, lname);
     	disease_list[c][i]->getID(id);
     	cout<< id << " " << fname << " " << lname << endl;
     }
+    getchar();
 }
 
 
@@ -257,9 +262,7 @@ void add_patient() {
 	cin >> choice;
 	switch (choice) {
 	case 1:// For NEW Patients
-	{
-		string fname, lname, symptoms;
-		generate_display();
+	{	string fname, lname, symptoms;
 		cout << "Enter Patient's First Name: ";
 		cin >> fname;
 		generate_display();
@@ -278,7 +281,7 @@ void add_patient() {
 		insert_DB(P);
 		for(int i=0; i < P->symptoms.size(); i++){
 			int j = P->symptoms[i];
-			disease_list[j].push_back(P); 
+			disease_list[j].push_back(P);
 		}
 
 		getchar();
@@ -315,17 +318,16 @@ void add_patient() {
 			bool flag = 1;
 			for(int k=0; k<disease_list[j].size(); k++){
 				string id1, id2;
-				P-> getID(id1); 
+				P-> getID(id1);
 				disease_list[j][k] -> getID(id2);
 				if(id1 == id2){
 					flag = 0;
 					break;
 				}
-				if(flag){
-					disease_list[j].push_back(P);
-				} 
 			}
-			disease_list[j].push_back(P); 
+			if(flag){
+					disease_list[j].push_back(P);
+				}
 		}
 
 		break;
@@ -344,6 +346,8 @@ void initialisePatients() {
 	P2->setName("Pranav", "Kulkarni");
 	P2->setSymptoms("Cough");
 	P2->setSymptoms("Fever");
+
+	
 
 	patient *P3 = new patient;
 	P3->setName("Shashwat", "Shukla");
@@ -371,5 +375,25 @@ void initialisePatients() {
 	assignDoc(P4);
 	getchar();
 	generate_display();
+
+	for(int i=0; i < P1->symptoms.size(); i++){
+			int j = P1->symptoms[i];
+			disease_list[j].push_back(P1);
+	}
+
+	for(int i=0; i < P2->symptoms.size(); i++){
+			int j = P2->symptoms[i];
+			disease_list[j].push_back(P2);
+	}
+
+	for(int i=0; i < P3->symptoms.size(); i++){
+			int j = P3->symptoms[i];
+			disease_list[j].push_back(P3);
+	}
+
+	for(int i=0; i < P4->symptoms.size(); i++){
+			int j = P4->symptoms[i];
+			disease_list[j].push_back(P4);
+	}
 
 }

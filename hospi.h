@@ -60,17 +60,19 @@ void patient::setID(string id)
 }
 
 void patient::setName(string fname, string lname)
-{	
+{
 	string lower = "";
 	locale loc;
 	for (auto elem : fname)	lower.push_back(tolower(elem, loc));
 	patient::fname = lower;
-	
+
 	lower = "";
 	for (auto elem : lname)	lower.push_back(tolower(elem, loc));
 	patient::lname = lower;
 
-	patient::ID = to_string(counter);
+	stringstream ss;
+	ss << counter;
+	patient::ID = ss.str();
 	counter++;
 }
 
@@ -275,7 +277,7 @@ void Emergency (patient * p)
 	    patient * q = AllDoctors[i].patientLine.front();
 	    newPatientLine.push(q);
 	    AllDoctors[i].patientLine.pop();
-	} 
+	}
 
 	AllDoctors[i].patientLine = newPatientLine;
 	string fname, lname,name;
