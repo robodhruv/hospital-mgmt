@@ -69,9 +69,9 @@ loop:
 	case '2':
 		search_by_name();
 		break;
-	// case '3':
-	// 	search_by_disease();
-	// 	break;
+	case '3':
+	    search_by_disease();
+	    break;
 	default:
 		cout << "Invalid Input!" << endl;
 		goto loop;
@@ -212,6 +212,25 @@ void search_by_name() { //Complete it!
 
 }
 
+void search_by_disease() {
+
+	int c;
+	cout << "Enter disease to search with: " << endl;
+	cout<< "1. Fever" << endl;
+    cout<< "2. Diarrhea" << endl;
+    cout<< "3. Fracture" << endl;
+    cout<< "4. MuscleInjury" << endl;
+    cout<< "5. HeartPain" << endl;
+    cout<< "6. Alzheimer" << endl;
+    cin >> c;
+    for(int i=0; i<disease_list[c].size(); i++){
+    	string fname, lname, id;
+    	disease_list[c][i]->getName(fname, lname);
+    	disease_list[c][i]->getID(id);
+    	cout<< id << " " << fname << " " << lname << endl;
+    }
+}
+
 
 void display_details(patient * pat) {
 	string fname, lname;
@@ -256,6 +275,11 @@ void add_patient() {
 
 		assignDoc(P);
 		insert_DB(P);
+		for(int i=0; i < P->symptoms.size(); i++){
+			int j = P->symptoms[i];
+			disease_list[j].push_back(P); 
+		}
+
 		getchar();
 		break;
 	}
@@ -284,6 +308,25 @@ void add_patient() {
 				getchar();
 			}
 		}
+		patient * P = DB_compl[ID];
+		for(int i=0; i < P->symptoms.size(); i++){
+			int j = P->symptoms[i];
+			bool flag = 1;
+			for(int k=0; k<disease_list[j].size(); k++){
+				string id1, id2;
+				P-> getID(id1); 
+				disease_list[j][k] -> getID(id2);
+				if(id1 == id2){
+					flag = 0;
+					break;
+				}
+				if(flag){
+					disease_list[j].push_back(P);
+				} 
+			}
+			disease_list[j].push_back(P); 
+		}
+
 		break;
 	}
 }

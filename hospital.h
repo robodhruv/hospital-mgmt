@@ -25,6 +25,7 @@ Function definitions will be enumerated in separate files.
 #include <locale>
 
 #define TABLE_SIZE 100
+#define num_diseases 6
 
 using namespace std;
 
@@ -69,6 +70,7 @@ public:
 vector <doctor> AllDoctors; // a vector containing all the doctors in the hospital.
 queue <string> output_logs;
 vector <patient*> DB_compl;
+vector<patient*> disease_list[num_diseases]; 
 
 //Since the number of doctors is very less, hashmap for doctors is not required.
 //Each doctor is identified by his name, id(remove if not needed) and specialisation
