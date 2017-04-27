@@ -29,9 +29,11 @@ loop:
 		// case 3:
 		// 	edit_patient();
 		// 	break;
-		// case 4:
-		// 	examine_queue();
-		// 	break;
+		case '4':
+		 	examine_queue();
+		 	getchar();
+		 	getchar();
+		 	break;
 		case '5':
 			emergency();
 			break;
@@ -73,6 +75,41 @@ loop:
 	default:
 		cout << "Invalid Input!" << endl;
 		goto loop;
+	}
+}
+
+void examine_queue()
+{
+	cout << "Enter Doctors's ID: ";
+	string id;
+	cin >> id;
+	generate_display();
+
+	for (int i=0; i<AllDoctors.size(); i++)
+	{
+		string ID;
+		AllDoctors[i].getID(ID);
+		if (id ==ID)
+		{
+			string docname; 
+			AllDoctors[i].getName(docname);
+			int ql = AllDoctors[i].get_queue_length();
+			cout<< docname <<" : "<< ql <<" patients waiting : ";
+			queue<patient*> newPatientLine;
+
+			while (! AllDoctors[i].patientLine.empty())
+			{
+			    patient * q = AllDoctors[i].patientLine.front();
+			    newPatientLine.push(q);
+			    string a,b;
+			    q -> getName(a,b);
+			    cout<< a<<" ";
+			    AllDoctors[i].patientLine.pop();
+			} 
+			cout<< endl;
+			AllDoctors[i].patientLine = newPatientLine;
+			return;
+		}
 	}
 }
 
