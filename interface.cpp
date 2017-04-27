@@ -31,8 +31,6 @@ loop:
 		 	getchar();
 		 	break;
 		case '4':
-		 	examine_queue();
-		 	getchar();
 		 	getchar();
 		 	break;
 		case '5':
@@ -226,11 +224,13 @@ void search_by_disease() {
     cout<< "6. Alzheimer" << endl;
     cin >> c; getchar();
 
+    generate_display();
+    cout << blue << "Patients with " << toSympString(c) << reset << endl;
     for(int i=0; i<disease_list[c].size(); i++){
     	string fname, lname, id;
     	disease_list[c][i]->getName(fname, lname);
     	disease_list[c][i]->getID(id);
-    	cout<< id << " " << fname << " " << lname << endl;
+    	cout<< bold << "ID: " << reset << id << bold << "\t Name: " << reset << fname << " " << lname << endl;
     }
     getchar();
 }
