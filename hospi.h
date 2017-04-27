@@ -84,6 +84,11 @@ void patient::getPrescriptionLenght()
 	cout<< patient::prescription.size()<<endl;
 }
 
+int patient::symptomsSize()
+{
+	return patient::symptoms.size();
+}
+
 
 //.......Doctor Functions..........//
 
